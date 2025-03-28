@@ -29,7 +29,7 @@ header h1 {
 /* Slideshow */
 .slideshow-container {
     position: relative;
-    width: 100%; /* Full screen width */
+    width: 75%; /* Full screen width */
     height: auto; /* Let height adjust based on image */
     margin: 15px auto; /* Center the slideshow */
     aspect-ratio: 16 / 9; /* Common aspect ratio for full-width images */
