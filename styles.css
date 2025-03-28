@@ -95,7 +95,7 @@ main {
     margin: 20px 0;
 }
 .section-divider img {
-    width: 50px;
+    width: 100px;
     height: auto;
     filter: drop-shadow(2px 2px 4px #000);
 }
