@@ -33,7 +33,7 @@ header p {
 .slideshow-container {
     position: relative;
     width: 80%; /* Takes 80% of the screen width */
-    max-width: 600px; /* Limits the size on large screens */
+    max-width: 800px; /* Limits the size on large screens */
     height: auto; /* Let height adjust based on image */
     margin: 15px auto; /* Center the slideshow */
     aspect-ratio: 1 / 1; /* Maintain a square aspect ratio (adjust if needed) */
