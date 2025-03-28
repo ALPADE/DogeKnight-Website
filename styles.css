@@ -35,7 +35,7 @@ header h1 {
     aspect-ratio: 16 / 9; /* Common aspect ratio for full-width images */
 }
 .slideshow-image {
-    width: 100%; /* Fills the screen */
+    width: 100%; /* Fills the container */
     height: auto; /* Maintains aspect ratio */
     position: absolute;
     top: 0;
