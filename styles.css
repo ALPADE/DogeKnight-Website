@@ -20,6 +20,7 @@ header {
     background-color: #333;
     padding: 20px;
     color: #FFD700; /* Gold */
+    position: relative; /* For positioning the tagline */
 }
 header h1 {
     font-size: 2.5em;
@@ -29,14 +30,14 @@ header h1 {
 /* Slideshow */
 .slideshow-container {
     position: relative;
-    width: 75%; /* Full screen width */
-    height: auto; /* Let height adjust based on image */
-    margin: 15px auto; /* Center the slideshow */
-    aspect-ratio: 16 / 9; /* Common aspect ratio for full-width images */
+    width: 100%; /* Full width of the header */
+    height: 300px; /* Fixed height to fit within header */
+    margin: 15px 0; /* Space above and below */
 }
 .slideshow-image {
     width: 100%; /* Fills the container */
-    height: auto; /* Maintains aspect ratio */
+    height: 100%; /* Fills the container height */
+    object-fit: cover; /* Ensures image fills space without distortion */
     position: absolute;
     top: 0;
     left: 0;
@@ -48,7 +49,7 @@ header h1 {
 }
 .tagline {
     position: absolute;
-    top: 20px; /* Adjust position from top */
+    bottom: 20px; /* Position at the bottom */
     left: 50%;
     transform: translateX(-50%); /* Center horizontally */
     font-size: 1.5em;
