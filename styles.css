@@ -83,6 +83,23 @@ header h1 {
     100% { background-position: 200% 50%; }
 }
 
+/* Market Feed */
+#market-feed {
+    background-color: #333;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+#market-feed h2 {
+    color: #FFD700;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px #000;
+}
+.market-feed-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 /* Main Content */
 main {
     background-color: #fff; /* White background for middle */
@@ -95,7 +112,7 @@ main {
     margin: 20px 0;
 }
 .section-divider img {
-    width: 100px;
+    width: 50px;
     height: auto;
     filter: drop-shadow(2px 2px 4px #000);
 }
@@ -140,7 +157,7 @@ a:hover {
     box-shadow: 0 0 15px #FFD700; /* Gold glow */
 }
 
-/* Bottom Sidebars */
+/* Bottom Sidebars with Live Charts */
 .bottom-sidebars {
     display: flex;
     justify-content: center;
@@ -158,16 +175,10 @@ a:hover {
     font-size: 1.5em;
     margin-bottom: 10px;
 }
-#crypto-chat p, #top-cryptos li {
-    font-size: 1em;
-    color: #333;
-}
-#top-cryptos ul {
-    list-style: none;
-    text-align: left;
-}
-#top-cryptos li {
-    margin-bottom: 5px;
+.chart-container {
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 /* Footer */

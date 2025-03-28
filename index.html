@@ -19,6 +19,20 @@
         <p class="tagline">Meme Lord of the Blockchain Realm—To Ye Olde Moon!</p>
     </header>
 
+    <!-- Live Market Feed -->
+    <section id="market-feed">
+        <h2>Live Crypto Market Feed</h2>
+        <div class="market-feed-container">
+            <!-- CoinGecko Widget -->
+            <iframe src="https://widget.coingecko.com/coingecko-coin-price-marquee-widget.html" 
+                    width="100%" 
+                    height="60" 
+                    frameborder="0" 
+                    scrolling="no">
+            </iframe>
+        </div>
+    </section>
+
     <!-- Main Content -->
     <main>
         <section id="about">
@@ -53,29 +67,32 @@
         </section>
     </main>
 
-    <!-- Sidebars at Bottom -->
+    <!-- Live Charts at Bottom -->
     <div class="bottom-sidebars">
         <aside id="crypto-chat">
-            <h3>Trending Crypto Chat</h3>
-            <p>User1: $DOGE is mooning! 🚀</p>
-            <p>User2: Check out $SHIB—new ATH!</p>
-            <p>User3: $DKNT next big thing? 🐶⚔️</p>
+            <h3>Trending Crypto Chart</h3>
+            <div class="chart-container">
+                <!-- CoinGecko Bitcoin Chart -->
+                <iframe src="https://widget.coingecko.com/coingecko-coin-price-chart-widget.html?coin_id=bitcoin" 
+                        width="100%" 
+                        height="300" 
+                        frameborder="0" 
+                        scrolling="no">
+                </iframe>
+            </div>
         </aside>
 
         <aside id="top-cryptos">
-            <h3>Top 10 Cryptos</h3>
-            <ul>
-                <li>1. Bitcoin (BTC)</li>
-                <li>2. Ethereum (ETH)</li>
-                <li>3. Binance Coin (BNB)</li>
-                <li>4. Solana (SOL)</li>
-                <li>5. XRP (XRP)</li>
-                <li>6. Cardano (ADA)</li>
-                <li>7. Avalanche (AVAX)</li>
-                <li>8. Dogecoin (DOGE)</li>
-                <li>9. Chainlink (LINK)</li>
-                <li>10. Polkadot (DOT)</li>
-            </ul>
+            <h3>Top Crypto Chart</h3>
+            <div class="chart-container">
+                <!-- CoinGecko Ethereum Chart -->
+                <iframe src="https://widget.coingecko.com/coingecko-coin-price-chart-widget.html?coin_id=ethereum" 
+                        width="100%" 
+                        height="300" 
+                        frameborder="0" 
+                        scrolling="no">
+                </iframe>
+            </div>
         </aside>
     </div>
 
