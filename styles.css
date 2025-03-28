@@ -25,7 +25,7 @@ header h1 {
     text-shadow: 2px 2px 4px #000;
 }
 header img {
-    width: 200px; /* Increased from 100px to 200px */
+    width: 800px; /* Increased from 100px to 200px */
     height: auto; /* Maintains aspect ratio */
     margin-top: 15px; /* Adjusted for larger image */
     transition: transform 0.3s ease;
