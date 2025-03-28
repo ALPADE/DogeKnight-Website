@@ -12,6 +12,9 @@ body {
     font-family: 'Cinzel', serif;
     text-align: center;
     line-height: 1.6;
+    display: flex; /* For sidebar layout */
+    flex-direction: column;
+    min-height: 100vh; /* Ensure footer stays at bottom */
 }
 
 /* Header */
@@ -25,21 +28,21 @@ header h1 {
     text-shadow: 2px 2px 4px #000;
 }
 header p {
-    font-size: 1.2em;
+    font-size: 1.5em; /* Increased from 1.2em */
     font-style: italic;
+    text-shadow: 1px 1px 2px #000;
 }
 
 /* Slideshow */
 .slideshow-container {
     position: relative;
-    width: 80%; /* Takes 80% of the screen width */
-    max-width: 800px; /* Limits the size on large screens */
+    width: 100%; /* Full screen width */
     height: auto; /* Let height adjust based on image */
     margin: 15px auto; /* Center the slideshow */
-    aspect-ratio: 1 / 1; /* Maintain a square aspect ratio (adjust if needed) */
+    aspect-ratio: 16 / 9; /* Common aspect ratio for full-width images */
 }
 .slideshow-image {
-    width: 100%; /* Fills the container */
+    width: 100%; /* Fills the screen */
     height: auto; /* Maintains aspect ratio */
     position: absolute;
     top: 0;
@@ -51,10 +54,34 @@ header p {
     opacity: 1; /* Show the active image */
 }
 
-/* Sections */
+/* Main Content */
+main {
+    display: flex;
+    flex: 1; /* Take remaining space */
+    background-color: #fff; /* White background for middle */
+}
+
+/* Sidebar - Left (Crypto Chat) */
+#crypto-chat {
+    width: 20%; /* Adjust as needed */
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-right: 2px solid #333;
+}
+#crypto-chat h3 {
+    color: #FFD700;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+#crypto-chat p {
+    font-size: 1em;
+    color: #333;
+}
+
+/* Main Sections */
 section {
     padding: 30px;
-    max-width: 800px;
+    max-width: 60%; /* Middle section */
     margin: 0 auto;
 }
 h2 {
@@ -79,6 +106,28 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Sidebar - Right (Top 10 Cryptos) */
+#top-cryptos {
+    width: 20%; /* Adjust as needed */
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-left: 2px solid #333;
+}
+#top-cryptos h3 {
+    color: #FFD700;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+#top-cryptos ul {
+    list-style: none;
+    text-align: left;
+}
+#top-cryptos li {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
 /* Meme Gallery */
 .gallery img {
     width: 200px;
@@ -92,7 +141,5 @@ footer {
     color: #FFD700;
     padding: 15px;
     font-size: 0.9em;
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
