@@ -36,6 +36,8 @@ header {
     color: #FFD700; /* Gold */
     position: relative;
     overflow: hidden; /* For parallax effect */
+    background-image: url('parchment-bg.jpg'); /* Add a parchment background */
+    background-size: cover;
 }
 header h1 {
     font-size: 2.5em;
@@ -83,6 +85,61 @@ header h1 {
     100% { background-position: 200% 50%; }
 }
 
+/* Mission Statement */
+#mission {
+    background-color: #333;
+    padding: 30px;
+    color: #FFD700;
+}
+#mission h2 {
+    font-size: 2em;
+    text-shadow: 1px 1px 2px #000;
+}
+#mission p {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Features */
+#features {
+    background-color: #fff;
+    padding: 30px;
+}
+#features h2 {
+    color: #FFD700;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px #000;
+}
+.features-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.feature {
+    width: 200px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+.feature img {
+    width: 50px;
+    height: auto;
+    margin-bottom: 10px;
+}
+.feature h3 {
+    color: #FFD700;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+.feature p {
+    font-size: 1em;
+    color: #333;
+}
+
 /* Market Feed */
 #market-feed {
     background-color: #333;
@@ -103,6 +160,27 @@ header h1 {
 /* Main Content */
 main {
     background-color: #fff; /* White background for middle */
+}
+
+/* How It Works */
+#how-it-works {
+    background-color: #333;
+    padding: 30px;
+    color: #FFD700;
+}
+#how-it-works h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px #000;
+}
+#how-it-works p, #how-it-works ul {
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: 0 auto;
+}
+#how-it-works ul {
+    text-align: left;
+    display: inline-block;
 }
 
 /* Section Divider */
@@ -179,6 +257,27 @@ a:hover {
     background-color: #fff;
     border-radius: 5px;
     overflow: hidden;
+}
+
+/* Community Section */
+#community {
+    background-color: #333;
+    padding: 30px;
+    color: #FFD700;
+}
+#community h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px #000;
+}
+#community p, #community ul {
+    font-size: 1.1em;
+    max-width: 800px;
+    margin: 0 auto;
+}
+#community ul {
+    text-align: left;
+    display: inline-block;
 }
 
 /* Footer */
