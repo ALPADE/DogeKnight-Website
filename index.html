@@ -28,6 +28,9 @@
     <!-- Features -->
     <section id="features">
         <h2>Why Join DogeKnight?</h2>
+        <div class="features-gif">
+            <img src="doge-knight-sword.gif" alt="DogeKnight raising sword">
+        </div>
         <div class="features-container">
             <!-- Pair 1: Meme-Powered Gains and Base Blockchain Integration -->
             <div class="feature-pair">
@@ -68,12 +71,17 @@
     <section id="market-feed">
         <h2>Live Crypto Market Feed</h2>
         <div class="market-feed-container">
-            <iframe src="https://widget.coingecko.com/coingecko-coin-price-marquee-widget.html" 
-                    width="100%" 
-                    height="60" 
-                    frameborder="0" 
-                    scrolling="no">
-            </iframe>
+            <!-- CoinMarketCap Price Ticker Widget -->
+            <div id="coinmarketcap-widget" style="width: 100%; height: 60px;"></div>
+            <script src="https://files.coinmarketcap.com/static/widget/coinMarquee.js"></script>
+            <script>
+                const cmcWidget = new CoinMarketCapMarquee({
+                    element: document.getElementById("coinmarketcap-widget"),
+                    theme: "dark", // Matches DogeKnight's dark theme
+                    currency: "USD",
+                    coins: ["bitcoin", "ethereum", "dogecoin"], // Add more coins as needed
+                });
+            </script>
         </div>
     </section>
 
@@ -126,29 +134,63 @@
         </section>
     </main>
 
-    <!-- Live Charts at Bottom -->
+    <!-- Live Charts and Chat at Bottom -->
     <div class="bottom-sidebars">
         <aside id="crypto-chat">
-            <h3>Trending Crypto Chart</h3>
-            <div class="chart-container">
-                <iframe src="https://widget.coingecko.com/coingecko-coin-price-chart-widget.html?coin_id=bitcoin" 
-                        width="100%" 
-                        height="300" 
-                        frameborder="0" 
-                        scrolling="no">
-                </iframe>
+            <h3>Trending Crypto Chat</h3>
+            <div class="chat-container">
+                <!-- CryptoMood News Widget -->
+                <div id="cryptomood-news-widget"></div>
+                <script src="https://cryptomood.com/widgets/news.js"></script>
+                <script>
+                    new CryptoMood.NewsWidget({
+                        element: document.getElementById("cryptomood-news-widget"),
+                        theme: "dark",
+                        coins: ["bitcoin", "ethereum", "dogecoin"],
+                        limit: 5 // Show 5 news items
+                    });
+
+                    // Simulate ads in the chat
+                    const chatContainer = document.getElementById("cryptomood-news-widget");
+                    function addAd() {
+                        const ad = document.createElement("p");
+                        ad.className = "chat-ad";
+                        ad.innerHTML = '⚔️ Join the Knights of the Woof! Follow us on X: <a href="https://twitter.com/DogeKnightCoin" target="_blank">@DogeKnightCoin</a> 🐶';
+                        chatContainer.appendChild(ad);
+                        chatContainer.scrollTop = chatContainer.scrollHeight; // Auto-scroll to bottom
+                    }
+                    // Add an ad every 30 seconds
+                    setInterval(addAd, 30000);
+                    // Add an initial ad
+                    addAd();
+                </script>
             </div>
         </aside>
 
         <aside id="top-cryptos">
             <h3>Top Crypto Chart</h3>
             <div class="chart-container">
-                <iframe src="https://widget.coingecko.com/coingecko-coin-price-chart-widget.html?coin_id=ethereum" 
-                        width="100%" 
-                        height="300" 
-                        frameborder="0" 
-                        scrolling="no">
-                </iframe>
+                <!-- TradingView Widget for Ethereum -->
+                <div class="tradingview-widget-container">
+                    <div id="tradingview-ethereum"></div>
+                    <script src="https://s3.tradingview.com/tv.js"></script>
+                    <script>
+                        new TradingView.widget({
+                            "width": "100%",
+                            "height": 300,
+                            "symbol": "BINANCE:ETHUSDT",
+                            "interval": "D",
+                            "timezone": "Etc/UTC",
+                            "theme": "dark",
+                            "style": "1",
+                            "locale": "en",
+                            "toolbar_bg": "#f1f3f6",
+                            "enable_publishing": false,
+                            "allow_symbol_change": true,
+                            "container_id": "tradingview-ethereum"
+                        });
+                    </script>
+                </div>
             </div>
         </aside>
     </div>
