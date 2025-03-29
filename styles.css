@@ -114,9 +114,16 @@ header h1 {
 }
 .features-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.feature-pair {
+    display: flex;
     justify-content: center;
     gap: 20px;
-    flex-wrap: wrap;
+    width: 100%;
+    max-width: 600px; /* Fixed width for pairs */
 }
 .feature {
     width: 200px;
@@ -138,6 +145,14 @@ header h1 {
 .feature p {
     font-size: 1em;
     color: #333;
+}
+.feature-divider {
+    text-align: center;
+}
+.feature-divider img {
+    width: 100px;
+    height: auto;
+    filter: drop-shadow(2px 2px 4px #000);
 }
 
 /* Market Feed */
