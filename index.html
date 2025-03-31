@@ -71,14 +71,26 @@
     <section id="presale">
         <h2>Join the DogeKnight Presale!</h2>
         <p>Secure thy DKNT tokens before the public launch and join the Knights of the Woof on their crusade for gains!</p>
+        <div class="presale-countdown">
+            <h3>Presale Starts In:</h3>
+            <div id="countdown">
+                <span id="days">00</span> Days 
+                <span id="hours">00</span> Hours 
+                <span id="minutes">00</span> Minutes 
+                <span id="seconds">00</span> Seconds
+            </div>
+        </div>
         <div class="presale-details">
             <p><strong>Token Price:</strong> 0.0001 ETH per DKNT</p>
             <p><strong>Hard Cap:</strong> 1,000 ETH</p>
             <p><strong>Tokens for Sale:</strong> 10,000,000 DKNT</p>
             <p><strong>Network:</strong> Base</p>
         </div>
-        <div class="presale-action">
-            <button id="connect-wallet" onclick="connectWallet()">Connect Wallet</button>
+        <div class="presale-action" id="presale-action">
+            <div id="wallet-selection">
+                <button id="connect-metamask" onclick="connectMetaMask()">Connect with MetaMask</button>
+                <button id="connect-walletconnect" onclick="connectWalletConnect()">Connect with WalletConnect</button>
+            </div>
             <div id="wallet-status" style="display: none;">
                 <p>Connected: <span id="wallet-address"></span></p>
                 <input type="number" id="token-amount" placeholder="Enter DKNT amount to buy" min="1">
@@ -231,16 +243,17 @@
         <p>Contract: [Insert Address] | Woofed on Base | © 2025 Knights of the Realm</p>
     </footer>
 
-    <!-- Web3.js for Wallet Integration -->
+    <!-- Web3.js and WalletConnect for Wallet Integration -->
     <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3-provider@2.0.0/dist/umd/index.min.js"></script>
     <script>
         let web3;
         let userAccount;
 
-        async function connectWallet() {
+        // MetaMask Connection
+        async function connectMetaMask() {
             if (window.ethereum) {
                 try {
-                    // Request account access
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                     userAccount = accounts[0];
                     web3 = new Web3(window.ethereum);
@@ -251,17 +264,42 @@
                         params: [{ chainId: '0x2105' }], // Base Mainnet
                     });
 
-                    // Display wallet address and show purchase form
-                    document.getElementById('wallet-address').innerText = userAccount;
-                    document.getElementById('wallet-status').style.display = 'block';
-                    document.getElementById('connect-wallet').style.display = 'none';
+                    showWalletStatus();
                 } catch (error) {
-                    console.error("Wallet connection failed:", error);
-                    alert("Failed to connect wallet. Please ensure MetaMask is installed and set to Base network.");
+                    console.error("MetaMask connection failed:", error);
+                    alert("Failed to connect with MetaMask. Please try again.");
                 }
             } else {
-                alert("Please install MetaMask to participate in the presale!");
+                alert("Please install MetaMask to use this option!");
             }
+        }
+
+        // WalletConnect Connection
+        async function connectWalletConnect() {
+            try {
+                const provider = new WalletConnectProvider({
+                    rpc: {
+                        8453: "https://mainnet.base.org" // Base Mainnet RPC
+                    },
+                    chainId: 8453, // Base Mainnet
+                });
+
+                await provider.enable();
+                web3 = new Web3(provider);
+                const accounts = await web3.eth.getAccounts();
+                userAccount = accounts[0];
+
+                showWalletStatus();
+            } catch (error) {
+                console.error("WalletConnect connection failed:", error);
+                alert("Failed to connect with WalletConnect. Please try again.");
+            }
+        }
+
+        function showWalletStatus() {
+            document.getElementById('wallet-address').innerText = userAccount;
+            document.getElementById('wallet-status').style.display = 'block';
+            document.getElementById('wallet-selection').style.display = 'none';
         }
 
         async function buyTokens() {
@@ -275,7 +313,6 @@
             const presaleContractAddress = "[Insert Presale Contract Address Here]"; // Replace with your presale contract address
 
             try {
-                // Send ETH to the presale contract
                 await web3.eth.sendTransaction({
                     from: userAccount,
                     to: presaleContractAddress,
@@ -289,6 +326,36 @@
                 alert("Failed to purchase tokens. Please try again.");
             }
         }
+
+        // Countdown Timer
+        const presaleStartDate = new Date("2025-04-18T00:00:00Z").getTime();
+        const countdownElement = document.getElementById('countdown');
+        const presaleActionElement = document.getElementById('presale-action');
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeRemaining = presaleStartDate - now;
+
+            if (timeRemaining <= 0) {
+                countdownElement.style.display = 'none';
+                presaleActionElement.style.display = 'block';
+                return;
+            }
+
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
     </script>
     <script src="script.js"></script>
 </body>
