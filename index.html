@@ -81,9 +81,9 @@
             </div>
         </div>
         <div class="presale-details">
-            <p><strong>Token Price:</strong> 0.0001 ETH per DKNT</p>
+            <p><strong>Token Price:</strong> 0.00001 ETH per DKNT</p>
             <p><strong>Hard Cap:</strong> 1,000 ETH</p>
-            <p><strong>Tokens for Sale:</strong> 10,000,000 DKNT</p>
+            <p><strong>Tokens for Sale:</strong> 1,000,000,000 DKNT</p>
             <p><strong>Network:</strong> Base</p>
         </div>
         <div class="presale-action" id="presale-action">
@@ -96,6 +96,7 @@
                 <input type="number" id="token-amount" placeholder="Enter DKNT amount to buy" min="1">
                 <button id="buy-tokens" onclick="buyTokens()">Buy DKNT Tokens</button>
             </div>
+            <p id="connection-status" style="color: #FFD700; margin-top: 10px;"></p>
         </div>
     </section>
 
@@ -244,44 +245,83 @@
     </footer>
 
     <!-- Web3.js and WalletConnect for Wallet Integration -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
-    <script src="https://unpkg.com/@walletconnect/web3-provider@2.0.0/dist/umd/index.min.js"></script>
+    <script src18n src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3-provider@2.10.0/dist/umd/index.min.js"></script>
     <script>
         let web3;
         let userAccount;
+        const connectionStatus = document.getElementById('connection-status');
 
         // MetaMask Connection
         async function connectMetaMask() {
+            connectionStatus.innerText = "Connecting to MetaMask...";
             if (window.ethereum) {
                 try {
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                     userAccount = accounts[0];
                     web3 = new Web3(window.ethereum);
 
-                    // Switch to Base network (Base Mainnet chain ID: 8453)
-                    await window.ethereum.request({
-                        method: 'wallet_switchEthereumChain',
-                        params: [{ chainId: '0x2105' }], // Base Mainnet
-                    });
+                    // Check if the user is on the Base network (Base Mainnet chain ID: 8453)
+                    const chainId = await web3.eth.getChainId();
+                    if (chainId !== 8453) {
+                        try {
+                            await window.ethereum.request({
+                                method: 'wallet_switchEthereumChain',
+                                params: [{ chainId: '0x2105' }], // Base Mainnet
+                            });
+                        } catch (switchError) {
+                            if (switchError.code === 4902) {
+                                // Chain not added, add Base network
+                                await window.ethereum.request({
+                                    method: 'wallet_addEthereumChain',
+                                    params: [{
+                                        chainId: '0x2105',
+                                        chainName: 'Base Mainnet',
+                                        nativeCurrency: {
+                                            name: 'Ethereum',
+                                            symbol: 'ETH',
+                                            decimals: 18
+                                        },
+                                        rpcUrls: ['https://mainnet.base.org'],
+                                        blockExplorerUrls: ['https://basescan.org']
+                                    }],
+                                });
+                            } else {
+                                throw switchError;
+                            }
+                        }
+                    }
 
                     showWalletStatus();
+                    connectionStatus.innerText = "Connected to MetaMask!";
                 } catch (error) {
                     console.error("MetaMask connection failed:", error);
-                    alert("Failed to connect with MetaMask. Please try again.");
+                    connectionStatus.innerText = "Failed to connect with MetaMask. Please try again.";
                 }
             } else {
-                alert("Please install MetaMask to use this option!");
+                connectionStatus.innerText = "Please install MetaMask to use this option!";
             }
         }
 
         // WalletConnect Connection
         async function connectWalletConnect() {
+            connectionStatus.innerText = "Connecting to WalletConnect...";
             try {
                 const provider = new WalletConnectProvider({
                     rpc: {
                         8453: "https://mainnet.base.org" // Base Mainnet RPC
                     },
                     chainId: 8453, // Base Mainnet
+                    qrcodeModalOptions: {
+                        mobileLinks: [
+                            "metamask",
+                            "trust",
+                            "coinbase",
+                            "rainbow",
+                            "argent",
+                            "ledger"
+                        ]
+                    }
                 });
 
                 await provider.enable();
@@ -290,9 +330,10 @@
                 userAccount = accounts[0];
 
                 showWalletStatus();
+                connectionStatus.innerText = "Connected to WalletConnect!";
             } catch (error) {
                 console.error("WalletConnect connection failed:", error);
-                alert("Failed to connect with WalletConnect. Please try again.");
+                connectionStatus.innerText = "Failed to connect with WalletConnect. Please try again.";
             }
         }
 
