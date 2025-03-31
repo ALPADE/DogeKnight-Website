@@ -67,6 +67,26 @@
         </div>
     </section>
 
+    <!-- Presale Section -->
+    <section id="presale">
+        <h2>Join the DogeKnight Presale!</h2>
+        <p>Secure thy DKNT tokens before the public launch and join the Knights of the Woof on their crusade for gains!</p>
+        <div class="presale-details">
+            <p><strong>Token Price:</strong> 0.0001 ETH per DKNT</p>
+            <p><strong>Hard Cap:</strong> 1,000 ETH</p>
+            <p><strong>Tokens for Sale:</strong> 10,000,000 DKNT</p>
+            <p><strong>Network:</strong> Base</p>
+        </div>
+        <div class="presale-action">
+            <button id="connect-wallet" onclick="connectWallet()">Connect Wallet</button>
+            <div id="wallet-status" style="display: none;">
+                <p>Connected: <span id="wallet-address"></span></p>
+                <input type="number" id="token-amount" placeholder="Enter DKNT amount to buy" min="1">
+                <button id="buy-tokens" onclick="buyTokens()">Buy DKNT Tokens</button>
+            </div>
+        </div>
+    </section>
+
     <!-- Live Market Feed -->
     <section id="market-feed">
         <h2>Live Crypto Market Feed</h2>
@@ -211,6 +231,65 @@
         <p>Contract: [Insert Address] | Woofed on Base | © 2025 Knights of the Realm</p>
     </footer>
 
+    <!-- Web3.js for Wallet Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
+    <script>
+        let web3;
+        let userAccount;
+
+        async function connectWallet() {
+            if (window.ethereum) {
+                try {
+                    // Request account access
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    userAccount = accounts[0];
+                    web3 = new Web3(window.ethereum);
+
+                    // Switch to Base network (Base Mainnet chain ID: 8453)
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: '0x2105' }], // Base Mainnet
+                    });
+
+                    // Display wallet address and show purchase form
+                    document.getElementById('wallet-address').innerText = userAccount;
+                    document.getElementById('wallet-status').style.display = 'block';
+                    document.getElementById('connect-wallet').style.display = 'none';
+                } catch (error) {
+                    console.error("Wallet connection failed:", error);
+                    alert("Failed to connect wallet. Please ensure MetaMask is installed and set to Base network.");
+                }
+            } else {
+                alert("Please install MetaMask to participate in the presale!");
+            }
+        }
+
+        async function buyTokens() {
+            const tokenAmount = document.getElementById('token-amount').value;
+            if (!tokenAmount || tokenAmount <= 0) {
+                alert("Please enter a valid amount of DKNT tokens to buy.");
+                return;
+            }
+
+            const ethAmount = (tokenAmount * 0.0001).toString(); // 0.0001 ETH per DKNT
+            const presaleContractAddress = "[Insert Presale Contract Address Here]"; // Replace with your presale contract address
+
+            try {
+                // Send ETH to the presale contract
+                await web3.eth.sendTransaction({
+                    from: userAccount,
+                    to: presaleContractAddress,
+                    value: web3.utils.toWei(ethAmount, 'ether'),
+                    gas: 21000,
+                });
+
+                alert(`Successfully purchased ${tokenAmount} DKNT tokens! They will be airdropped to your wallet after the presale ends.`);
+            } catch (error) {
+                console.error("Token purchase failed:", error);
+                alert("Failed to purchase tokens. Please try again.");
+            }
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -164,6 +164,71 @@ header h1 {
     filter: drop-shadow(2px 2px 4px #000);
 }
 
+/* Presale Section */
+#presale {
+    background-color: #333;
+    padding: 30px;
+    color: #FFD700;
+    border: 2px solid #FFD700; /* Gold border */
+    border-radius: 5px;
+    margin: 20px auto;
+}
+#presale h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px #000;
+}
+#presale p {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto 20px;
+}
+.presale-details {
+    background-color: #222;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.presale-details p {
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+.presale-action {
+    text-align: center;
+}
+#connect-wallet, #buy-tokens {
+    background-color: #FFD700;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#connect-wallet:hover, #buy-tokens:hover {
+    background-color: #DAA520;
+}
+#wallet-status {
+    margin-top: 20px;
+}
+#wallet-status p {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+#token-amount {
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #FFD700;
+    border-radius: 5px;
+    background-color: #222;
+    color: #FFD700;
+    font-family: 'Cinzel', serif;
+    font-size: 1em;
+}
+
 /* Market Feed */
 #market-feed {
     background-color: #333;
@@ -329,15 +394,7 @@ a:hover {
     margin-bottom: 15px;
     text-shadow: 1px 1px 2px #000;
 }
-#community p, #community ul {
-    font-size: 1.1em;
-    max-width: 800px;
-    margin: 0 auto;
-}
-#community ul {
-    text-align: left;
-    display: inline-block;
-}
+#community p, ව
 
 /* Footer */
 footer {
