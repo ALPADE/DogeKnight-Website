@@ -246,7 +246,7 @@
 
     <!-- Web3.js and WalletConnect for Wallet Integration -->
     <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
-    <script src="https://unpkg.com/@walletconnect/web3-provider@2.10.0/dist/umd/index.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/ethereum-provider@2.10.0/dist/index.min.js"></script>
     <script>
         let web3;
         let userAccount;
@@ -255,53 +255,51 @@
         // MetaMask Connection
         async function connectMetaMask() {
             connectionStatus.innerText = "Connecting to MetaMask...";
-            if (!window.ethereum) {
-                connectionStatus.innerText = "Please install MetaMask to use this option!";
-                return;
-            }
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    userAccount = accounts[0];
+                    web3 = new Web3(window.ethereum);
 
-            try {
-                // Request account access
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                userAccount = accounts[0];
-                web3 = new Web3(window.ethereum);
-
-                // Check current chain and switch to Base Mainnet (chain ID: 8453)
-                const chainId = await web3.eth.getChainId();
-                if (Number(chainId) !== 8453) {
-                    try {
-                        await window.ethereum.request({
-                            method: 'wallet_switchEthereumChain',
-                            params: [{ chainId: '0x2105' }], // Base Mainnet
-                        });
-                    } catch (switchError) {
-                        if (switchError.code === 4902) {
-                            // Chain not added, add Base network
+                    // Check if the user is on the Base network (Base Mainnet chain ID: 8453)
+                    const chainId = await web3.eth.getChainId();
+                    if (Number(chainId) !== 8453) {
+                        try {
                             await window.ethereum.request({
-                                method: 'wallet_addEthereumChain',
-                                params: [{
-                                    chainId: '0x2105',
-                                    chainName: 'Base Mainnet',
-                                    nativeCurrency: {
-                                        name: 'Ethereum',
-                                        symbol: 'ETH',
-                                        decimals: 18
-                                    },
-                                    rpcUrls: ['https://mainnet.base.org'],
-                                    blockExplorerUrls: ['https://basescan.org']
-                                }],
+                                method: 'wallet_switchEthereumChain',
+                                params: [{ chainId: '0x2105' }], // Base Mainnet
                             });
-                        } else {
-                            throw switchError;
+                        } catch (switchError) {
+                            if (switchError.code === 4902) {
+                                // Chain not added, add Base network
+                                await window.ethereum.request({
+                                    method: 'wallet_addEthereumChain',
+                                    params: [{
+                                        chainId: '0x2105',
+                                        chainName: 'Base Mainnet',
+                                        nativeCurrency: {
+                                            name: 'Ethereum',
+                                            symbol: 'ETH',
+                                            decimals: 18
+                                        },
+                                        rpcUrls: ['https://base-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY'], // Replace with your Alchemy API key
+                                        blockExplorerUrls: ['https://basescan.org']
+                                    }],
+                                });
+                            } else {
+                                throw switchError;
+                            }
                         }
                     }
-                }
 
-                showWalletStatus();
-                connectionStatus.innerText = "Connected to MetaMask!";
-            } catch (error) {
-                console.error("MetaMask connection failed:", error);
-                connectionStatus.innerText = `Failed to connect with MetaMask: ${error.message || 'Unknown error'}`;
+                    showWalletStatus();
+                    connectionStatus.innerText = "Connected to MetaMask!";
+                } catch (error) {
+                    console.error("MetaMask connection failed:", error);
+                    connectionStatus.innerText = `Failed to connect with MetaMask: ${error.message}`;
+                }
+            } else {
+                connectionStatus.innerText = "Please install MetaMask to use this option!";
             }
         }
 
@@ -309,11 +307,11 @@
         async function connectWalletConnect() {
             connectionStatus.innerText = "Connecting to WalletConnect...";
             try {
-                const provider = new WalletConnectProvider({
-                    rpc: {
-                        8453: "https://mainnet.base.org" // Base Mainnet RPC
-                    },
+                const provider = new EthereumProvider({
                     chainId: 8453, // Base Mainnet
+                    rpc: {
+                        8453: "https://base-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY" // Replace with your Alchemy API key
+                    },
                     qrcodeModalOptions: {
                         mobileLinks: [
                             "metamask",
@@ -326,24 +324,16 @@
                     }
                 });
 
-                // Enable the provider (shows QR code)
                 await provider.enable();
                 web3 = new Web3(provider);
                 const accounts = await web3.eth.getAccounts();
                 userAccount = accounts[0];
 
-                // Verify chain ID
-                const chainId = await web3.eth.getChainId();
-                if (Number(chainId) !== 8453) {
-                    connectionStatus.innerText = "Please switch to Base Mainnet in your wallet.";
-                    return;
-                }
-
                 showWalletStatus();
                 connectionStatus.innerText = "Connected to WalletConnect!";
             } catch (error) {
                 console.error("WalletConnect connection failed:", error);
-                connectionStatus.innerText = `Failed to connect with WalletConnect: ${error.message || 'Unknown error'}`;
+                connectionStatus.innerText = `Failed to connect with WalletConnect: ${error.message}`;
             }
         }
 
@@ -374,7 +364,7 @@
                 alert(`Successfully purchased ${tokenAmount} DKNT tokens! They will be airdropped to your wallet after the presale ends.`);
             } catch (error) {
                 console.error("Token purchase failed:", error);
-                alert("Failed to purchase tokens. Please try again.");
+                alert(`Failed to purchase tokens: ${error.message}`);
             }
         }
 
