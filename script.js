@@ -58,6 +58,7 @@ async function connectMetaMask() {
 
             showWalletStatus();
             connectionStatus.innerText = "Connected to MetaMask!";
+            console.log("MetaMask connected:", userAccount);
         } catch (error) {
             console.error("MetaMask connection failed:", error);
             connectionStatus.innerText = `Failed to connect with MetaMask: ${error.message}`;
@@ -70,11 +71,12 @@ async function connectMetaMask() {
 async function connectWalletConnect() {
     connectionStatus.innerText = "Connecting to WalletConnect...";
     try {
-        const provider = new WalletConnectProvider({
+        const provider = new window.WalletConnectProvider({
             rpc: {
                 8453: "https://base-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY"
             },
             chainId: 8453,
+            qrcode: true,
             qrcodeModalOptions: {
                 mobileLinks: ["metamask", "trust", "coinbase", "rainbow", "argent", "ledger"]
             }
@@ -87,6 +89,7 @@ async function connectWalletConnect() {
 
         showWalletStatus();
         connectionStatus.innerText = "Connected to WalletConnect!";
+        console.log("WalletConnect connected:", userAccount);
     } catch (error) {
         console.error("WalletConnect connection failed:", error);
         connectionStatus.innerText = `Failed to connect with WalletConnect: ${error.message}`;
