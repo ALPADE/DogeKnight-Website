@@ -29,7 +29,7 @@ body {
     background-color: #0f0f1a;
     position: fixed;
     width: 100%;
-    top: 40px; /* Adjusted for market feed */
+    top: 40px;
     z-index: 1000;
 }
 
@@ -77,7 +77,7 @@ body {
     align-items: center;
     text-align: center;
     background: linear-gradient(135deg, #FFD700, #e6c200);
-    padding-top: 60px; /* Adjusted for fixed market feed and navbar */
+    padding-top: 60px;
 }
 
 .hero-content h1 {
@@ -96,20 +96,23 @@ body {
 .slideshow-container {
     position: relative;
     width: 100%;
-    max-width: 800px; /* Increased for PC */
+    max-width: 800px;
+    height: 400px;
     margin: 20px auto;
     overflow: hidden;
 }
 
 .slideshow-image {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
     display: none;
-    object-fit: cover; /* Ensures images scale properly */
+    transition: opacity 1s ease-in-out;
 }
 
 .slideshow-image.active {
     display: block;
+    opacity: 1;
 }
 
 .cta-button {
@@ -337,11 +340,11 @@ footer {
     .navbar {
         flex-direction: column;
         gap: 20px;
-        top: 40px; /* Adjusted for market feed */
+        top: 40px;
     }
 
     .hero {
-        padding-top: 80px; /* Adjusted for mobile */
+        padding-top: 80px;
     }
 
     .hero-content h1 {
@@ -353,7 +356,12 @@ footer {
     }
 
     .slideshow-container {
-        max-width: 90vw; /* Full width on mobile */
+        max-width: 90vw;
+        height: 250px;
+    }
+
+    .slideshow-image {
+        object-fit: cover;
     }
 
     .feature-pair {
@@ -363,12 +371,11 @@ footer {
 
 @media (min-width: 769px) {
     .slideshow-container {
-        max-width: 800px; /* Larger on PC */
-        height: 400px; /* Fixed height for consistency */
+        max-width: 800px;
+        height: 400px;
     }
 
     .slideshow-image {
-        height: 100%;
-        object-fit: contain; /* Prevents cropping on PC */
+        object-fit: contain;
     }
 }
