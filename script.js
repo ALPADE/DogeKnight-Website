@@ -10,7 +10,7 @@ function nextSlide() {
     currentSlide = (currentSlide + 1) % slides.length;
     showSlide(currentSlide);
 }
-setInterval(nextSlide, 3000); // Change slide every 3 seconds
+setInterval(nextSlide, 3000);
 showSlide(currentSlide);
 
 // Web3 Wallet Integration
@@ -70,11 +70,11 @@ async function connectMetaMask() {
 async function connectWalletConnect() {
     connectionStatus.innerText = "Connecting to WalletConnect...";
     try {
-        const provider = new EthereumProvider({
-            chainId: 8453,
+        const provider = new WalletConnectProvider({
             rpc: {
                 8453: "https://base-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY"
             },
+            chainId: 8453,
             qrcodeModalOptions: {
                 mobileLinks: ["metamask", "trust", "coinbase", "rainbow", "argent", "ledger"]
             }
@@ -125,7 +125,7 @@ async function buyTokens() {
 }
 
 // Countdown Timer
-const presaleStartDate = new Date("2025-04-18T00:00:00Z").getTime();
+const presaleStartDate = new Date("2025-05-29T00:00:00Z").getTime();
 const countdownElement = document.getElementById('countdown');
 const presaleActionElement = document.getElementById('presale-action');
 
