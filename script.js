@@ -4,6 +4,7 @@ const slides = document.querySelectorAll('.slideshow-image');
 function showSlide(index) {
     slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === index);
+        slide.style.opacity = i === index ? '1' : '0';
     });
 }
 function nextSlide() {
@@ -84,7 +85,7 @@ async function connectWalletConnect() {
 
         await provider.enable();
         web3 = new Web3(provider);
-        const accounts = await web3.eth.getAccounts();
+        const accounts = window.web3.eth.getAccounts();
         userAccount = accounts[0];
 
         showWalletStatus();
