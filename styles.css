@@ -164,7 +164,7 @@ body {
 }
 
 .features-gif img {
-    max-width: 200px;
+    max-width: 300px; /* Increased from 200px */
     margin: 20px auto;
 }
 
@@ -189,7 +189,7 @@ body {
 }
 
 .feature img {
-    max-width: 50px;
+    max-width: 80px; /* Increased from 50px */
     margin-bottom: 10px;
 }
 
@@ -200,7 +200,7 @@ body {
 }
 
 .feature-divider img {
-    max-width: 100px;
+    max-width: 150px; /* Increased from 100px */
     margin: 20px auto;
 }
 
@@ -366,6 +366,18 @@ footer {
 
     .feature-pair {
         flex-direction: column;
+    }
+
+    .features-gif img {
+        max-width: 200px; /* Slightly smaller on mobile for balance */
+    }
+
+    .feature img {
+        max-width: 60px; /* Slightly smaller on mobile */
+    }
+
+    .feature-divider img {
+        max-width: 100px; /* Slightly smaller on mobile */
     }
 }
 
