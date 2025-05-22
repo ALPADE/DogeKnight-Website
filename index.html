@@ -1,403 +1,165 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DogeKnight (DKNT)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.3px Menlo; color: #000000; -webkit-text-stroke: #000000; background-color: #ffffff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.3px Menlo; color: #000000; -webkit-text-stroke: #000000; background-color: #ffffff; min-height: 15.0px}
+    span.s1 {font-kerning: none}
+  </style>
 </head>
 <body>
-    <!-- Header with Slideshow -->
-    <header>
-        <h1>DogeKnight (DKNT)</h1>
-        <div class="slideshow-container">
-            <img src="doge-knight.png" alt="DogeKnight 1" class="slideshow-image">
-            <img src="doge-knight2.png" alt="DogeKnight 2" class="slideshow-image">
-            <img src="doge-knight3.png" alt="DogeKnight 3" class="slideshow-image">
-        </div>
-        <p class="tagline">Meme Lord of the Blockchain Realm—To Ye Olde Moon!</p>
-    </header>
-
-    <!-- Mission Statement -->
-    <section id="mission">
-        <h2>A Medieval Meme Coin Quest</h2>
-        <p>DogeKnight (DKNT): A medieval-inspired meme coin on Base, DogeKnight revives the 2013 Doge legacy with a shiba inu clad in pixelated armor. Leading the "Knights of the Woof" on a crusade for gains, DKNT blends nostalgic vibes with crypto chaos—join the quest to storm the castles of the blockchain realm!</p>
-    </section>
-
-    <!-- Features -->
-    <section id="features">
-        <h2>Why Join DogeKnight?</h2>
-        <div class="features-gif">
-            <img src="doge-knight-sword.gif" alt="DogeKnight raising sword">
-        </div>
-        <div class="features-container">
-            <!-- Pair 1: Meme-Powered Gains and Base Blockchain Integration -->
-            <div class="feature-pair">
-                <div class="feature">
-                    <img src="shiba-helmet-icon.png" alt="Shiba Helmet Icon">
-                    <h3>Meme-Powered Gains</h3>
-                    <p>Fueled by the spirit of 2013 Doge memes, DKNT drives community hype for moon-bound gains.</p>
-                </div>
-                <div class="feature">
-                    <img src="shield-icon.png" alt="Shield Icon">
-                    <h3>Base Blockchain Integration</h3>
-                    <p>Built on Base, DKNT ensures fast, low-cost transactions for all knights.</p>
-                </div>
-            </div>
-
-            <!-- Gift DogeKnight Icon -->
-            <div class="feature-divider">
-                <img src="gift-doge-knight.png" alt="Gift DogeKnight Icon">
-            </div>
-
-            <!-- Pair 2: Community Governance and Meme Gallery Engagement -->
-            <div class="feature-pair">
-                <div class="feature">
-                    <img src="scroll-icon.png" alt="Scroll Icon">
-                    <h3>Community Governance</h3>
-                    <p>The Knights of the Woof shape DKNT’s future through open, meme-driven governance.</p>
-                </div>
-                <div class="feature">
-                    <img src="gallery-icon.png" alt="Gallery Icon">
-                    <h3>Meme Gallery Engagement</h3>
-                    <p>Submit and showcase thy memes, fostering creativity in the realm.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Presale Section -->
-    <section id="presale">
-        <h2>Join the DogeKnight Presale!</h2>
-        <p>Secure thy DKNT tokens before the public launch and join the Knights of the Woof on their crusade for gains!</p>
-        <div class="presale-countdown">
-            <h3>Presale Starts In:</h3>
-            <div id="countdown">
-                <span id="days">30</span> Days 
-                <span id="hours">00</span> Hours 
-                <span id="minutes">00</span> Minutes 
-                <span id="seconds">00</span> Seconds
-            </div>
-        </div>
-        <div class="presale-details">
-            <p><strong>Token Price:</strong> 0.0001 ETH per DKNT</p>
-            <p><strong>Hard Cap:</strong> 1,000 ETH</p>
-            <p><strong>Tokens for Sale:</strong> 10,000,000 DKNT</p>
-            <p><strong>Network:</strong> Base</p>
-        </div>
-        <div class="presale-action" id="presale-action">
-            <div id="wallet-selection">
-                <button id="connect-metamask" onclick="connectMetaMask()">Connect with MetaMask</button>
-                <button id="connect-walletconnect" onclick="connectWalletConnect()">Connect with WalletConnect</button>
-            </div>
-            <div id="wallet-status" style="display: none;">
-                <p>Connected: <span id="wallet-address"></span></p>
-                <input type="number" id="token-amount" placeholder="Enter DKNT amount to buy" min="1">
-                <button id="buy-tokens" onclick="buyTokens()">Buy DKNT Tokens</button>
-            </div>
-            <p id="connection-status" style="color: #FFD700; margin-top: 10px;"></p>
-        </div>
-    </section>
-
-    <!-- Live Market Feed -->
-    <section id="market-feed">
-        <h2>Live Crypto Market Feed</h2>
-        <div class="market-feed-container">
-            <!-- CoinMarketCap Price Ticker Widget -->
-            <div id="coinmarketcap-widget" style="width: 100%; height: 60px;"></div>
-            <script src="https://files.coinmarketcap.com/static/widget/coinMarquee.js"></script>
-            <script>
-                const cmcWidget = new CoinMarketCapMarquee({
-                    element: document.getElementById("coinmarketcap-widget"),
-                    theme: "dark", // Matches DogeKnight's dark theme
-                    currency: "USD",
-                    coins: ["bitcoin", "ethereum", "dogecoin"], // Add more coins as needed
-                });
-            </script>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <main>
-        <section id="how-it-works">
-            <h2>How DogeKnight Works</h2>
-            <p>Join the crusade with these simple steps, unlike other meme coins that lack purpose:</p>
-            <ul>
-                <li>Bridge ETH to Base for low-cost transactions.</li>
-                <li>Swap for DKNT on SushiSwap to join the realm.</li>
-                <li>Engage with the Knights of the Woof on X (@DogeKnightCoin).</li>
-                <li>Submit memes to the gallery and vote on community initiatives.</li>
-            </ul>
-        </section>
-
-        <div class="section-divider">
-            <img src="sword-icon.png" alt="Sword Divider">
-        </div>
-
-        <section id="about">
-            <h2>The Lore</h2>
-            <p>Behold DogeKnight, forged in the fires of 2013 Doge memes! A shiba clad in pixelated armor, he leads the Knights of the Woof on a crusade for gains. Join the quest, hodl the blade, and storm the castles of Base!</p>
-        </section>
-
-        <div class="section-divider">
-            <img src="sword-icon.png" alt="Sword Divider">
-        </div>
-
-        <section id="join">
-            <h2>Join the Crusade</h2>
-            <ul>
-                <li>1. Grab Base ETH (<a href="https://bridge.base.org" target="_blank">bridge here</a>).</li>
-                <li>2. Ride to SushiSwap (<a href="https://sushi.com" target="_blank">sushi.com</a>, Base network).</li>
-                <li>3. Swap for DKNT: [Insert Contract Address Here].</li>
-                <li>4. Join the Woof on X: <a href="https://twitter.com/DogeKnightCoin" target="_blank">@DogeKnightCoin</a>.</li>
-            </ul>
-        </section>
-
-        <div class="section-divider">
-            <img src="sword-icon.png" alt="Sword Divider">
-        </div>
-
-        <section id="gallery" class="gallery">
-            <h2>Meme Gallery</h2>
-            <p>Submit thy memes, Knights!</p>
-            <img src="doge-knight.png" alt="DogeKnight Placeholder 1">
-            <img src="doge-knight2.png" alt="DogeKnight Placeholder 2">
-            <img src="doge-knight3.png" alt="DogeKnight Placeholder 3">
-        </section>
-    </main>
-
-    <!-- Live Charts and Chat at Bottom -->
-    <div class="bottom-sidebars">
-        <aside id="crypto-chat">
-            <h3>Trending Crypto Chat</h3>
-            <div class="chat-container">
-                <!-- CryptoMood News Widget -->
-                <div id="cryptomood-news-widget"></div>
-                <script src="https://cryptomood.com/widgets/news.js"></script>
-                <script>
-                    new CryptoMood.NewsWidget({
-                        element: document.getElementById("cryptomood-news-widget"),
-                        theme: "dark",
-                        coins: ["bitcoin", "ethereum", "dogecoin"],
-                        limit: 5 // Show 5 news items
-                    });
-
-                    // Simulate ads in the chat
-                    const chatContainer = document.getElementById("cryptomood-news-widget");
-                    function addAd() {
-                        const ad = document.createElement("p");
-                        ad.className = "chat-ad";
-                        ad.innerHTML = '⚔️ Join the Knights of the Woof! Follow us on X: <a href="https://twitter.com/DogeKnightCoin" target="_blank">@DogeKnightCoin</a> 🐶';
-                        chatContainer.appendChild(ad);
-                        chatContainer.scrollTop = chatContainer.scrollHeight; // Auto-scroll to bottom
-                    }
-                    // Add an ad every 30 seconds
-                    setInterval(addAd, 30000);
-                    // Add an initial ad
-                    addAd();
-                </script>
-            </div>
-        </aside>
-
-        <aside id="top-cryptos">
-            <h3>Top Crypto Chart</h3>
-            <div class="chart-container">
-                <!-- TradingView Widget for Ethereum -->
-                <div class="tradingview-widget-container">
-                    <div id="tradingview-ethereum"></div>
-                    <script src="https://s3.tradingview.com/tv.js"></script>
-                    <script>
-                        new TradingView.widget({
-                            "width": "100%",
-                            "height": 300,
-                            "symbol": "BINANCE:ETHUSDT",
-                            "interval": "D",
-                            "timezone": "Etc/UTC",
-                            "theme": "dark",
-                            "style": "1",
-                            "locale": "en",
-                            "toolbar_bg": "#f1f3f6",
-                            "enable_publishing": false,
-                            "allow_symbol_change": true,
-                            "container_id": "tradingview-ethereum"
-                        });
-                    </script>
-                </div>
-            </div>
-        </aside>
-    </div>
-
-    <!-- Join the Community -->
-    <section id="community">
-        <h2>Join the Woof</h2>
-        <p>Connect with the Knights of the Woof and join the crusade!</p>
-        <ul>
-            <li><a href="https://twitter.com/DogeKnightCoin" target="_blank">Follow us on X: @DogeKnightCoin</a></li>
-            <li><a href="[Insert Discord Link]" target="_blank">Join our Discord</a></li>
-            <li><a href="[Insert Telegram Link]" target="_blank">Join our Telegram</a></li>
-        </ul>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>Contract: [Insert Address] | Woofed on Base | © 2025 Knights of the Realm</p>
-    </footer>
-
-    <!-- Web3.js and WalletConnect for Wallet Integration -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
-    <script src="https://unpkg.com/@walletconnect/ethereum-provider@2.10.0/dist/index.min.js"></script>
-    <script>
-        let web3;
-        let userAccount;
-        const connectionStatus = document.getElementById('connection-status');
-
-        // MetaMask Connection
-        async function connectMetaMask() {
-            connectionStatus.innerText = "Connecting to MetaMask...";
-            if (window.ethereum) {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    userAccount = accounts[0];
-                    web3 = new Web3(window.ethereum);
-
-                    // Check if the user is on the Base network (Base Mainnet chain ID: 8453)
-                    const chainId = await web3.eth.getChainId();
-                    if (Number(chainId) !== 8453) {
-                        try {
-                            await window.ethereum.request({
-                                method: 'wallet_switchEthereumChain',
-                                params: [{ chainId: '0x2105' }], // Base Mainnet
-                            });
-                        } catch (switchError) {
-                            if (switchError.code === 4902) {
-                                // Chain not added, add Base network
-                                await window.ethereum.request({
-                                    method: 'wallet_addEthereumChain',
-                                    params: [{
-                                        chainId: '0x2105',
-                                        chainName: 'Base Mainnet',
-                                        nativeCurrency: {
-                                            name: 'Ethereum',
-                                            symbol: 'ETH',
-                                            decimals: 18
-                                        },
-                                        rpcUrls: ['https://base-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY'], // Replace with your Alchemy API key
-                                        blockExplorerUrls: ['https://basescan.org']
-                                    }],
-                                });
-                            } else {
-                                throw switchError;
-                            }
-                        }
-                    }
-
-                    showWalletStatus();
-                    connectionStatus.innerText = "Connected to MetaMask!";
-                } catch (error) {
-                    console.error("MetaMask connection failed:", error);
-                    connectionStatus.innerText = `Failed to connect with MetaMask: ${error.message}`;
-                }
-            } else {
-                connectionStatus.innerText = "Please install MetaMask to use this option!";
-            }
-        }
-
-        // WalletConnect Connection
-        async function connectWalletConnect() {
-            connectionStatus.innerText = "Connecting to WalletConnect...";
-            try {
-                const provider = new EthereumProvider({
-                    chainId: 8453, // Base Mainnet
-                    rpc: {
-                        8453: "https://base-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY" // Replace with your Alchemy API key
-                    },
-                    qrcodeModalOptions: {
-                        mobileLinks: [
-                            "metamask",
-                            "trust",
-                            "coinbase",
-                            "rainbow",
-                            "argent",
-                            "ledger"
-                        ]
-                    }
-                });
-
-                await provider.enable();
-                web3 = new Web3(provider);
-                const accounts = await web3.eth.getAccounts();
-                userAccount = accounts[0];
-
-                showWalletStatus();
-                connectionStatus.innerText = "Connected to WalletConnect!";
-            } catch (error) {
-                console.error("WalletConnect connection failed:", error);
-                connectionStatus.innerText = `Failed to connect with WalletConnect: ${error.message}`;
-            }
-        }
-
-        function showWalletStatus() {
-            document.getElementById('wallet-address').innerText = userAccount;
-            document.getElementById('wallet-status').style.display = 'block';
-            document.getElementById('wallet-selection').style.display = 'none';
-        }
-
-        async function buyTokens() {
-            const tokenAmount = document.getElementById('token-amount').value;
-            if (!tokenAmount || tokenAmount <= 0) {
-                alert("Please enter a valid amount of DKNT tokens to buy.");
-                return;
-            }
-
-            const ethAmount = (tokenAmount * 0.0001).toString(); // 0.0001 ETH per DKNT
-            const presaleContractAddress = "[Insert Presale Contract Address Here]"; // Replace with your presale contract address
-
-            try {
-                await web3.eth.sendTransaction({
-                    from: userAccount,
-                    to: presaleContractAddress,
-                    value: web3.utils.toWei(ethAmount, 'ether'),
-                    gas: 21000,
-                });
-
-                alert(`Successfully purchased ${tokenAmount} DKNT tokens! They will be airdropped to your wallet after the presale ends.`);
-            } catch (error) {
-                console.error("Token purchase failed:", error);
-                alert(`Failed to purchase tokens: ${error.message}`);
-            }
-        }
-
-        // Countdown Timer
-        const presaleStartDate = new Date("2025-05-01T00:00:00Z").getTime();
-        const countdownElement = document.getElementById('countdown');
-        const presaleActionElement = document.getElementById('presale-action');
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const timeRemaining = presaleStartDate - now;
-
-            if (timeRemaining <= 0) {
-                countdownElement.style.display = 'none';
-                presaleActionElement.style.display = 'block';
-                return;
-            }
-
-            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerText = days.toString().padStart(2, '0');
-            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
-        }
-
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call
-    </script>
-    <script src="script.js"></script>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;DogeKnight (DKNT) - Meme Lord of the Blockchain Realm&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&amp;family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="styles.css"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Navigation Bar --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;nav class="navbar"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="logo"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h1&gt;DogeKnight (DKNT)&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;ul class="nav-links"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;a href="#presale"&gt;Presale&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;a href="#mission"&gt;Mission&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;a href="#gallery"&gt;Meme Gallery&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;a href="#community"&gt;Community&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;a href="#" class="connect-wallet" onclick="showWalletOptions()"&gt;Connect Wallet&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Hero Section with Slideshow --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="home" class="hero"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="hero-content"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h1&gt;DogeKnight (DKNT)&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="slideshow-container"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;img src="doge-knight.png" alt="DogeKnight 1" class="slideshow-image"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;img src="doge-knight2.png" alt="DogeKnight 2" class="slideshow-image"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;img src="doge-knight3.png" alt="DogeKnight 3" class="slideshow-image"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p class="tagline"&gt;Meme Lord of the Blockchain Realm—To Ye Olde Moon!&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;a href="#presale" class="cta-button"&gt;Join the Presale&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Mission Statement --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="mission" class="mission"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2&gt;A Medieval Meme Coin Quest&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;DogeKnight (DKNT): A medieval-inspired meme coin on Base, DogeKnight revives the 2013 Doge legacy with a shiba inu clad in pixelated armor. Leading the "Knights of the Woof" on a crusade for gains, DKNT blends nostalgic vibes with crypto chaos—join the quest to storm the castles of the blockchain realm!&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Features Section --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="features" class="features"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2&gt;Why Join DogeKnight?&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="features-gif"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;img src="doge-knight-sword.gif" alt="DogeKnight raising sword"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="features-container"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="feature-pair"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="feature"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;img src="shiba-helmet-icon.png" alt="Shiba Helmet Icon"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Meme-Powered Gains&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Fueled by the spirit of 2013 Doge memes, DKNT drives community hype for moon-bound gains.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="feature"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;img src="shield-icon.png" alt="Shield Icon"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Base Blockchain Integration&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Built on Base, DKNT ensures fast, low-cost transactions for all knights.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="feature-divider"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;img src="gift-doge-knight.png" alt="Gift DogeKnight Icon"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="feature-pair"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="feature"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;img src="scroll-icon.png" alt="Scroll Icon"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Community Governance&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p&gt;The Knights of the Woof shape DKNT’s future through open, meme-driven governance.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="feature"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;img src="gallery-icon.png" alt="Gallery Icon"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Meme Gallery Engagement&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Submit and showcase thy memes, fostering creativity in the realm.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Presale Section --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="presale" class="presale"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2&gt;Join the DogeKnight Presale!&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Secure thy DKNT tokens before the public launch and join the Knights of the Woof on their crusade for gains!&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="presale-countdown"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h3&gt;Presale Starts In:&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="countdown"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span id="days"&gt;00&lt;/span&gt; Days<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span id="hours"&gt;00&lt;/span&gt; Hours<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span id="minutes"&gt;00&lt;/span&gt; Minutes<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span id="seconds"&gt;00&lt;/span&gt; Seconds</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="presale-details"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;&lt;strong&gt;Token Price:&lt;/strong&gt; 0.0001 ETH per DKNT&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;&lt;strong&gt;Hard Cap:&lt;/strong&gt; 1,000 ETH&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;&lt;strong&gt;Tokens for Sale:&lt;/strong&gt; 10,000,000 DKNT&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;&lt;strong&gt;Network:&lt;/strong&gt; Base&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="presale-action" id="presale-action"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="wallet-selection"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button id="connect-metamask" onclick="connectMetaMask()"&gt;Connect with MetaMask&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button id="connect-walletconnect" onclick="connectWalletConnect()"&gt;Connect with WalletConnect&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="wallet-status" style="display: none;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p&gt;Connected: &lt;span id="wallet-address"&gt;&lt;/span&gt;&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;input type="number" id="token-amount" placeholder="Enter DKNT amount to buy" min="1"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button id="buy-tokens" onclick="buyTokens()"&gt;Buy DKNT Tokens&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p id="connection-status" style="color: #FFD700; margin-top: 10px;"&gt;&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Meme Gallery Section --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="gallery" class="gallery"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2&gt;Meme Gallery&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Submit thy memes, Knights!&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="gallery-container"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;img src="doge-knight.png" alt="DogeKnight Placeholder 1"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;img src="doge-knight2.png" alt="DogeKnight Placeholder 2"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;img src="doge-knight3.png" alt="DogeKnight Placeholder 3"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Community Section --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section id="community" class="community"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2&gt;Join the Woof&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Connect with the Knights of the Woof and join the crusade!&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;ul&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;a href="https://twitter.com/DogeKnightCoin" target="_blank"&gt;Follow us on X: @DogeKnightCoin&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;a href="[Insert Discord Link]" target="_blank"&gt;Join our Discord&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;li&gt;&lt;a href="[Insert Telegram Link]" target="_blank"&gt;Join our Telegram&lt;/a&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Footer --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;footer&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Contract: [Insert Address] | Woofed on Base | © 2025 Knights of the Realm&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Scripts --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/@walletconnect/ethereum-provider@2.10.0/dist/index.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="script.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
 </body>
 </html>
