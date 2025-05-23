@@ -85,7 +85,7 @@ async function connectWalletConnect() {
 
         await provider.enable();
         web3 = new Web3(provider);
-        const accounts = window.web3.eth.getAccounts();
+        const accounts = await web3.eth.getAccounts();
         userAccount = accounts[0];
 
         showWalletStatus();
@@ -156,3 +156,11 @@ function updateCountdown() {
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+// Market Feed Fallback
+window.addEventListener('load', () => {
+    const ticker = document.getElementById('tradingview-ticker');
+    if (!ticker.querySelector('iframe')) {
+        document.getElementById('market-feed-fallback').style.display = 'block';
+    }
+});
