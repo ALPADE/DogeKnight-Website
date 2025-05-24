@@ -57,11 +57,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
+    padding: 10px 25px;
     background-color: #0f0f1a;
     position: fixed;
-    width: 100%;
-    top: 40px;
+    width: 50%;
+    top: 20px;
     z-index: 1000;
 }
 
