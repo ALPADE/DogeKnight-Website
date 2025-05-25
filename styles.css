@@ -32,7 +32,7 @@ body {
     padding: 10px;
     border-radius: 10px;
     text-align: center;
-    text-decoration: none; /* Remove underline from link */
+    text-decoration: none;
     color: #FFD700;
     transition: transform 0.3s ease;
 }
@@ -61,7 +61,6 @@ body {
     background-color: #2a2a2a;
     padding: 15px 20px;
     position: sticky;
-    top: 60px; /* Adjust based on market feed height */
     z-index: 900;
 }
 
@@ -104,9 +103,10 @@ body {
 
 .menu-toggle {
     display: none;
-    font-size: 24px;
+    font-size: 30px;
     color: #FFD700;
     cursor: pointer;
+    padding: 5px 10px;
 }
 
 /* Hero Section */
@@ -148,7 +148,8 @@ body {
 
 .slideshow-container {
     position: relative;
-    max-width: 300px;
+    width: 100%;
+    max-width: 600px; /* Increased for desktop */
     margin: 0 auto 20px;
 }
 
@@ -156,6 +157,7 @@ body {
     width: 100%;
     height: auto;
     display: none;
+    object-fit: contain;
 }
 
 .slideshow-image.active {
@@ -364,10 +366,14 @@ footer {
 @media (max-width: 768px) {
     .navbar {
         flex-wrap: wrap;
+        padding-top: 50px; /* Offset for market-feed height */
     }
 
     .menu-toggle {
         display: block;
+        position: absolute;
+        top: 10px;
+        right: 20px;
     }
 
     .nav-links {
@@ -379,6 +385,7 @@ footer {
         top: 100%;
         left: 0;
         padding: 10px 0;
+        z-index: 900;
     }
 
     .nav-links.active {
@@ -412,7 +419,12 @@ footer {
     }
 
     .slideshow-container {
-        max-width: 250px;
+        max-width: 90vw; /* Full width minus padding */
+        min-width: 300px; /* Minimum size for visibility */
+    }
+
+    .slideshow-image {
+        max-height: 400px; /* Limit height to prevent distortion */
     }
 
     .mission h2, .features h2, .presale h2, .gallery h2, .community h2 {
