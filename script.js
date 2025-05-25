@@ -1,166 +1,85 @@
-// Slideshow Logic
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slideshow-image');
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
-        slide.style.opacity = i === index ? '1' : '0';
-    });
-}
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}
-setInterval(nextSlide, 3000);
-showSlide(currentSlide);
-
-// Web3 Wallet Integration
+// Wallet Connection (Existing)
 let web3;
 let userAccount;
-const connectionStatus = document.getElementById('connection-status');
-
-function showWalletOptions() {
-    document.getElementById('wallet-selection').style.display = 'block';
-}
 
 async function connectMetaMask() {
-    connectionStatus.innerText = "Connecting to MetaMask...";
     if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
         try {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             userAccount = accounts[0];
-            web3 = new Web3(window.ethereum);
-
-            // Check for Base Mainnet (chain ID: 8453)
-            const chainId = await web3.eth.getChainId();
-            if (Number(chainId) !== 8453) {
-                try {
-                    await window.ethereum.request({
-                        method: 'wallet_switchEthereumChain',
-                        params: [{ chainId: '0x2105' }],
-                    });
-                } catch (switchError) {
-                    if (switchError.code === 4902) {
-                        await window.ethereum.request({
-                            method: 'wallet_addEthereumChain',
-                            params: [{
-                                chainId: '0x2105',
-                                chainName: 'Base Mainnet',
-                                nativeCurrency: { name: 'Ethereum', symbol: 'ETH', decimals: 18 },
-                                rpcUrls: ['https://base-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY'],
-                                blockExplorerUrls: ['https://basescan.org']
-                            }],
-                        });
-                    } else {
-                        throw switchError;
-                    }
-                }
-            }
-
-            showWalletStatus();
-            connectionStatus.innerText = "Connected to MetaMask!";
-            console.log("MetaMask connected:", userAccount);
+            document.getElementById('wallet-address').innerText = userAccount.substring(0, 6) + '...' + userAccount.substring(userAccount.length - 4);
+            document.getElementById('wallet-selection').style.display = 'none';
+            document.getElementById('wallet-status').style.display = 'block';
+            document.getElementById('connection-status').innerText = 'Connected to MetaMask!';
         } catch (error) {
-            console.error("MetaMask connection failed:", error);
-            connectionStatus.innerText = `Failed to connect with MetaMask: ${error.message}`;
+            document.getElementById('connection-status').innerText = 'Failed to connect MetaMask: ' + error.message;
         }
     } else {
-        connectionStatus.innerText = "Please install MetaMask to use this option!";
+        document.getElementById('connection-status').innerText = 'MetaMask not detected. Please install MetaMask.';
     }
 }
 
 async function connectWalletConnect() {
-    connectionStatus.innerText = "Connecting to WalletConnect...";
+    const provider = new WalletConnectProvider({
+        infuraId: 'YOUR_INFURA_ID', // Replace with your Infura ID
+    });
     try {
-        const provider = new window.WalletConnectProvider({
-            rpc: {
-                8453: "https://base-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY"
-            },
-            chainId: 8453,
-            qrcode: true,
-            qrcodeModalOptions: {
-                mobileLinks: ["metamask", "trust", "coinbase", "rainbow", "argent", "ledger"]
-            }
-        });
-
         await provider.enable();
         web3 = new Web3(provider);
         const accounts = await web3.eth.getAccounts();
         userAccount = accounts[0];
-
-        showWalletStatus();
-        connectionStatus.innerText = "Connected to WalletConnect!";
-        console.log("WalletConnect connected:", userAccount);
+        document.getElementById('wallet-address').innerText = userAccount.substring(0, 6) + '...' + userAccount.substring(userAccount.length - 4);
+        document.getElementById('wallet-selection').style.display = 'none';
+        document.getElementById('wallet-status').style.display = 'block';
+        document.getElementById('connection-status').innerText = 'Connected to WalletConnect!';
     } catch (error) {
-        console.error("WalletConnect connection failed:", error);
-        connectionStatus.innerText = `Failed to connect with WalletConnect: ${error.message}`;
+        document.getElementById('connection-status').innerText = 'Failed to connect WalletConnect: ' + error.message;
     }
 }
 
-function showWalletStatus() {
-    document.getElementById('wallet-address').innerText = userAccount;
-    document.getElementById('wallet-status').style.display = 'block';
-    document.getElementById('wallet-selection').style.display = 'none';
+function showWalletOptions() {
+    document.getElementById('wallet-selection').style.display = 'block';
+    document.getElementById('wallet-status').style.display = 'none';
+    document.getElementById('connection-status').innerText = '';
 }
 
 async function buyTokens() {
-    const tokenAmount = document.getElementById('token-amount').value;
-    if (!tokenAmount || tokenAmount <= 0) {
-        alert("Please enter a valid amount of DKNT tokens to buy.");
+    const amount = document.getElementById('token-amount').value;
+    if (!web3 || !userAccount) {
+        document.getElementById('connection-status').innerText = 'Please connect a wallet first.';
         return;
     }
-
-    const ethAmount = (tokenAmount * 0.0001).toString();
-    const presaleContractAddress = "[Insert Presale Contract Address Here]";
-
-    try {
-        await web3.eth.sendTransaction({
-            from: userAccount,
-            to: presaleContractAddress,
-            value: web3.utils.toWei(ethAmount, 'ether'),
-            gas: 21000,
-        });
-
-        alert(`Successfully purchased ${tokenAmount} DKNT tokens! They will be airdropped to your wallet after the presale ends.`);
-    } catch (error) {
-        console.error("Token purchase failed:", error);
-        alert(`Failed to purchase tokens: ${error.message}`);
-    }
-}
-
-// Countdown Timer
-const presaleStartDate = new Date("2025-05-29T00:00:00Z").getTime();
-const countdownElement = document.getElementById('countdown');
-const presaleActionElement = document.getElementById('presale-action');
-
-function updateCountdown() {
-    const now = new Date().getTime();
-    const timeRemaining = presaleStartDate - now;
-
-    if (timeRemaining <= 0) {
-        countdownElement.style.display = 'none';
-        presaleActionElement.style.display = 'block';
+    if (!amount || amount <= 0) {
+        document.getElementById('connection-status').innerText = 'Please enter a valid amount.';
         return;
     }
-
-    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-    document.getElementById('days').innerText = days.toString().padStart(2, '0');
-    document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+    // Placeholder for token purchase logic
+    document.getElementById('connection-status').innerText = `Processing purchase of ${amount} DKNT...`;
 }
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+// Slideshow (Existing)
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slideshow-image');
 
-// Market Feed Fallback
-window.addEventListener('load', () => {
-    const ticker = document.getElementById('tradingview-ticker');
-    if (!ticker.querySelector('iframe')) {
-        document.getElementById('market-feed-fallback').style.display = 'block';
-    }
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) {
+            slide.classList.add('active');
+        }
+    });
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+setInterval(nextSlide, 3000);
+showSlide(currentSlide);
+
+// Hamburger Menu Toggle
+document.querySelector('.menu-toggle').addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.toggle('active');
 });
