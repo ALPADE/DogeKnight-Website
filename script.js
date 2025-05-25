@@ -1,4 +1,4 @@
-// Wallet Connection (Existing)
+// Wallet Connection
 let web3;
 let userAccount;
 
@@ -58,7 +58,7 @@ async function buyTokens() {
     document.getElementById('connection-status').innerText = `Processing purchase of ${amount} DKNT...`;
 }
 
-// Slideshow (Existing)
+// Slideshow
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slideshow-image');
 
@@ -83,3 +83,17 @@ showSlide(currentSlide);
 document.querySelector('.menu-toggle').addEventListener('click', () => {
     document.querySelector('.nav-links').classList.toggle('active');
 });
+
+// Dynamic Navbar Offset
+function adjustNavbarPosition() {
+    const marketFeed = document.querySelector('.market-feed');
+    const navbar = document.getElementById('navbar');
+    if (marketFeed && navbar) {
+        const marketFeedHeight = marketFeed.offsetHeight;
+        navbar.style.top = `${marketFeedHeight}px`;
+    }
+}
+
+// Run on load and resize
+window.addEventListener('load', adjustNavbarPosition);
+window.addEventListener('resize', adjustNavbarPosition);
