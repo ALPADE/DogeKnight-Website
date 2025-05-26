@@ -149,7 +149,7 @@ body {
 .slideshow-container {
     position: relative;
     width: 100%;
-    max-width: 600px; /* Increased for desktop */
+    max-width: 600px;
     margin: 0 auto 20px;
 }
 
@@ -366,7 +366,7 @@ footer {
 @media (max-width: 768px) {
     .navbar {
         flex-wrap: wrap;
-        padding-top: 50px; /* Offset for market-feed height */
+        padding-top: 50px;
     }
 
     .menu-toggle {
@@ -419,12 +419,12 @@ footer {
     }
 
     .slideshow-container {
-        max-width: 90vw; /* Full width minus padding */
-        min-width: 300px; /* Minimum size for visibility */
+        max-width: 90vw;
+        min-width: 300px;
     }
 
     .slideshow-image {
-        max-height: 400px; /* Limit height to prevent distortion */
+        max-height: 400px;
     }
 
     .mission h2, .features h2, .presale h2, .gallery h2, .community h2 {
