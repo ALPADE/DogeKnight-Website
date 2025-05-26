@@ -97,3 +97,37 @@ function adjustNavbarPosition() {
 // Run on load and resize
 window.addEventListener('load', adjustNavbarPosition);
 window.addEventListener('resize', adjustNavbarPosition);
+
+// Presale Countdown
+function startCountdown() {
+    const countdownDate = new Date('June 1, 2025 00:00:00 UTC').getTime();
+    const countdownElement = document.getElementById('countdown');
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+
+    const countdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        if (distance <= 0) {
+            clearInterval(countdownInterval);
+            countdownElement.innerHTML = 'Presale has started!';
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        daysElement.textContent = days.toString().padStart(2, '0');
+        hoursElement.textContent = hours.toString().padStart(2, '0');
+        minutesElement.textContent = minutes.toString().padStart(2, '0');
+        secondsElement.textContent = seconds.toString().padStart(2, '0');
+    }, 1000);
+}
+
+// Start countdown on page load
+window.addEventListener('load', startCountdown);
