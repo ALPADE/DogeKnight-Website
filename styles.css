@@ -1,269 +1,252 @@
 /* General Styles */
-* {
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
     font-family: 'Poppins', sans-serif;
-    background-color: #1a1a1a;
+    background: #1a1a1a;
     color: #fff;
-    line-height: 1.6;
 }
 
 /* Market Feed */
 .market-feed {
-    background-color: #2a2a2a;
-    padding: 10px 0;
     position: fixed;
-    width: 100%;
     top: 0;
+    width: 100%;
     z-index: 1000;
+    background: #000;
 }
 
 /* Floating Banner */
 .floating-banner {
     position: fixed;
-    bottom: 20px;
     right: 20px;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.8);
+    top: 100px;
+    background: #FFD700;
     padding: 10px;
-    border-radius: 10px;
-    text-align: center;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: #FFD700;
-    transition: transform 0.3s ease;
+    color: #1a1a1a;
 }
-
-.floating-banner:hover {
-    transform: scale(1.05);
-}
-
 .floating-banner img {
-    max-width: 150px;
-    height: auto;
-    margin-bottom: 10px;
+    width: 40px;
+    margin-right: 10px;
 }
 
-.floating-banner p {
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0;
-}
-
-/* Navigation Bar */
+/* Navbar */
 .navbar {
+    position: sticky;
+    top: 0;
+    background: #1a1a1a;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2a2a2a;
-    padding: 15px 20px;
-    position: sticky;
     z-index: 900;
 }
-
-.logo h1 {
+.navbar .logo h1 {
     font-family: 'Cinzel', serif;
-    font-size: 24px;
     color: #FFD700;
+    margin: 0;
 }
-
 .nav-links {
     display: flex;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
-
 .nav-links li {
     margin: 0 15px;
 }
-
 .nav-links a {
     color: #fff;
     text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s ease;
+    font-family: 'Cinzel', serif;
 }
-
 .nav-links a:hover {
     color: #FFD700;
 }
-
 .connect-wallet {
-    background-color: #FFD700;
-    color: #1a1a1a !important;
+    background: #FFD700;
+    color: #1a1a1a;
     padding: 8px 15px;
     border-radius: 5px;
 }
-
-.connect-wallet:hover {
-    background-color: #e6c200;
-}
-
 .menu-toggle {
     display: none;
-    font-size: 30px;
-    color: #FFD700;
+    font-size: 24px;
     cursor: pointer;
-    padding: 5px 10px;
+    color: #FFD700;
+}
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    .nav-links.active {
+        display: block;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #1a1a1a;
+        padding: 20px;
+    }
+    .nav-links li {
+        margin: 10px 0;
+    }
+    .menu-toggle {
+        display: block;
+    }
 }
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
-    background: url('background-castle.jpg') no-repeat center center/cover;
+    padding: 80px 20px;
+    background: url('background-parchment.jpg') center/cover;
 }
-
 .hero-content h1 {
     font-family: 'Cinzel', serif;
-    font-size: 48px;
+    font-size: 3em;
     color: #FFD700;
-    margin-bottom: 20px;
 }
-
+.slideshow-container {
+    max-width: 600px;
+    margin: 20px auto;
+    position: relative;
+}
+.slideshow-image {
+    width: 100%;
+    display: none;
+}
+.slideshow-image.active {
+    display: block;
+}
 .tagline {
-    font-size: 24px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.5em;
     color: #fff;
-    margin-bottom: 30px;
 }
-
 .cta-button {
-    background-color: #FFD700;
+    display: inline-block;
+    background: #FFD700;
     color: #1a1a1a;
     padding: 15px 30px;
     text-decoration: none;
-    font-weight: 600;
+    font-family: 'Cinzel', serif;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    margin-top: 20px;
 }
-
 .cta-button:hover {
-    background-color: #e6c200;
-}
-
-.slideshow-container {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto 20px;
-}
-
-.slideshow-image {
-    width: 100%;
-    height: auto;
-    display: none;
-    object-fit: contain;
-}
-
-.slideshow-image.active {
-    display: block;
+    background: #e6c200;
 }
 
 /* Mission Section */
 .mission {
-    padding: 50px 20px;
+    padding: 60px 20px;
     text-align: center;
-    background-color: #2a2a2a;
 }
-
 .mission h2 {
     font-family: 'Cinzel', serif;
-    font-size: 36px;
+    font-size: 2.5em;
     color: #FFD700;
-    margin-bottom: 20px;
 }
-
 .mission p {
     max-width: 800px;
-    margin: 0 auto;
-    font-size: 18px;
+    margin: 20px auto;
+    font-size: 1.2em;
 }
 
 /* Features Section */
 .features {
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.features h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 36px;
-    color: #FFD700;
-    margin-bottom: 20px;
-}
-
-.features-gif img {
-    max-width: 200px;
-    margin: 0 auto 20px;
-}
-
-.features-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.feature-pair {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.feature {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 300px;
-    text-align: center;
-}
-
-.feature img {
-    max-width: 50px;
-    margin-bottom: 10px;
-}
-
-.feature h3 {
-    font-size: 20px;
-    color: #FFD700;
-    margin-bottom: 10px;
-}
-
-.feature-divider img {
-    max-width: 100px;
-    margin: 20px 0;
-}
-
-.launch {
-    background: #1a1a1a;
     padding: 60px 20px;
     text-align: center;
-    color: #fff;
+}
+.features h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5em;
+    color: #FFD700;
+}
+.features-gif img {
+    max-width: 200px;
+    margin: 20px auto;
+}
+.features-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.feature-pair {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+.feature {
+    flex: 1;
+    margin: 0 10px;
+}
+.feature img {
+    width: 50px;
+}
+.feature h3 {
+    font-family: 'Cinzel', serif;
+    color: #FFD700;
+}
+@media (max-width: 768px) {
+    .feature-pair {
+        flex-direction: column;
+    }
+}
+.feature-divider img {
+    max-width: 100px;
+    margin: 20px auto;
+}
+
+/* Launch Section */
+.launch {
+    padding: 60px 20px;
+    text-align: center;
+    background: #1a1a1a;
 }
 .launch h2 {
     font-family: 'Cinzel', serif;
     font-size: 2.5em;
     color: #FFD700;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
-.launch-details, .launch-action {
+.launch-details {
     max-width: 800px;
     margin: 0 auto;
 }
-.launch-details ul {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-}
-.launch-details li {
-    font-size: 1.2em;
+.launch-frame {
+    background: url('parchment-texture.jpg') center/cover;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 15px;
     margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    font-family: 'Cinzel', serif;
+    font-size: 1.3em;
+}
+.frame-gold {
+    color: #FFD700;
+}
+.frame-crimson {
+    color: #DC143C;
+}
+.frame-emerald {
+    color: #2ECC71;
+}
+.frame-sapphire {
+    color: #1E90FF;
+}
+.launch-action {
+    max-width: 800px;
+    margin: 20px auto;
+}
+.launch-action p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
 .launch-action button {
     background: #FFD700;
@@ -293,162 +276,54 @@ body {
 
 /* Gallery Section */
 .gallery {
-    padding: 50px 20px;
+    padding: 60px 20px;
     text-align: center;
 }
-
 .gallery h2 {
     font-family: 'Cinzel', serif;
-    font-size: 36px;
+    font-size: 2.5em;
     color: #FFD700;
-    margin-bottom: 20px;
 }
-
 .gallery-container {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
 }
-
 .gallery-container img {
     max-width: 200px;
-    border-radius: 10px;
 }
 
 /* Community Section */
 .community {
-    padding: 50px 20px;
+    padding: 60px 20px;
     text-align: center;
-    background-color: #2a2a2a;
 }
-
 .community h2 {
     font-family: 'Cinzel', serif;
-    font-size: 36px;
+    font-size: 2.5em;
     color: #FFD700;
-    margin-bottom: 20px;
 }
-
 .community ul {
     list-style: none;
+    padding: 0;
 }
-
 .community ul li {
     margin: 10px 0;
 }
-
 .community ul li a {
     color: #FFD700;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1.2em;
 }
-
 .community ul li a:hover {
-    text-decoration: underline;
+    color: #e6c200;
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #2a2a2a;
+    background: #000;
     color: #FFD700;
-    font-size: 14px;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .navbar {
-        flex-wrap: wrap;
-        padding-top: 50px;
-    }
-
-    .menu-toggle {
-        display: block;
-        position: absolute;
-        top: 10px;
-        right: 20px;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #2a2a2a;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        padding: 10px 0;
-        z-index: 900;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links li {
-        margin: 10px 0;
-        text-align: center;
-    }
-
-    .nav-links a {
-        font-size: 18px;
-    }
-
-    .connect-wallet {
-        margin: 10px auto;
-        display: inline-block;
-    }
-
-    .hero-content h1 {
-        font-size: 36px;
-    }
-
-    .tagline {
-        font-size: 18px;
-    }
-
-    .cta-button {
-        padding: 10px 20px;
-    }
-
-    .slideshow-container {
-        max-width: 90vw;
-        min-width: 300px;
-    }
-
-    .slideshow-image {
-        max-height: 400px;
-    }
-
-    .mission h2, .features h2, .presale h2, .gallery h2, .community h2 {
-        font-size: 28px;
-    }
-
-    .feature-pair {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .feature {
-        max-width: 100%;
-    }
-
-    .presale-details, .presale-countdown h3, #countdown {
-        font-size: 16px;
-    }
-
-    .floating-banner {
-        bottom: 10px;
-        right: 10px;
-    }
-
-    .floating-banner img {
-        max-width: 120px;
-    }
-
-    .floating-banner p {
-        font-size: 12px;
-    }
 }
