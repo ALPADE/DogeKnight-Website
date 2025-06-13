@@ -45,7 +45,7 @@
         <div class="menu-toggle">☰</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#presale">Presale</a></li>
+            <li><a href="#launch">Launch Hype</a></li>
             <li><a href="#mission">Mission</a></li>
             <li><a href="#gallery">Meme Gallery</a></li>
             <li><a href="#community">Community</a></li>
@@ -63,7 +63,7 @@
                 <img src="doge-knight3.png" alt="DogeKnight 3" class="slideshow-image">
             </div>
             <p class="tagline">Meme Lord of the Blockchain Realm—To Ye Olde Moon!</p>
-            <a href="#presale" class="cta-button">Join the Presale</a>
+            <a href="#launch" class="cta-button">Join the Crusade</a>
         </div>
     </section>
 
@@ -110,34 +110,29 @@
         </div>
     </section>
 
-    <!-- Presale Section -->
-    <section id="presale" class="presale">
-        <h2>Join the DogeKnight Presale!</h2>
-        <p>Secure thy DKNT tokens before the public launch and join the Knights of the Woof on their crusade for gains!</p>
-        <div class="presale-countdown">
-            <h3>Presale Starts In:</h3>
-            <div id="countdown">
-                <span id="days">00</span> Days 
-                <span id="hours">00</span> Hours 
-                <span id="minutes">00</span> Minutes 
-                <span id="seconds">00</span> Seconds
-            </div>
+    <!-- Launch Hype Section -->
+    <section id="launch" class="launch">
+        <h2>DogeKnight Launches Tomorrow!</h2>
+        <p>The gates of the blockchain realm open on <strong>June 14, 2025</strong>! DogeKnight (DKNT) charges into battle on <strong>Base</strong>, wielding the power of 2013 Doge memes and medieval swagger. Join the <strong>Knights of the Woof</strong> in this epic crusade for gains!</p>
+        <div class="launch-details">
+            <h3>Why DKNT Will Slay the Charts:</h3>
+            <ul>
+                <li><strong>Epic Meme Energy</strong>: Shiba inu knights lead the charge with nostalgic Doge vibes!</li>
+                <li><strong>Lightning-Fast on Base</strong>: Low-cost, high-speed transactions for all knights.</li>
+                <li><strong>Community Power</strong>: Shape the realm with meme-driven governance.</li>
+                <li><strong>Meme Glory</strong>: Create and share legendary memes in our gallery!</li>
+            </ul>
+            <p><strong>Contract Address</strong>: 0x3ebcbca3d7fa7b314f080af116b52c352036a7e3</p>
+            <p><strong>Network</strong>: Base</p>
         </div>
-        <div class="presale-details">
-            <p><strong>Token Price:</strong> 0.00001 ETH per DKNT</p>
-            <p><strong>Hard Cap:</strong> 1,000 ETH</p>
-            <p><strong>Tokens for Sale:</strong> 1,000,000,000 DKNT</p>
-            <p><strong>Network:</strong> Base</p>
-        </div>
-        <div class="presale-action" id="presale-action">
+        <div class="launch-action">
+            <p>Ready to join the quest? Connect your wallet and prepare for glory!</p>
             <div id="wallet-selection">
                 <button id="connect-metamask" onclick="connectMetaMask()">Connect with MetaMask</button>
                 <button id="connect-walletconnect" onclick="connectWalletConnect()">Connect with WalletConnect</button>
             </div>
             <div id="wallet-status" style="display: none;">
                 <p>Connected: <span id="wallet-address"></span></p>
-                <input type="number" id="token-amount" placeholder="Enter DKNT amount to buy" min="1">
-                <button id="buy-tokens" onclick="buyTokens()">Buy DKNT Tokens</button>
             </div>
             <p id="connection-status" style="color: #FFD700; margin-top: 10px;"></p>
         </div>
