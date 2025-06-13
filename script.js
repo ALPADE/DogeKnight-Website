@@ -1,41 +1,99 @@
 // Wallet Connection
 let web3;
 let userAccount;
+let walletProvider = null;
 
-async function connectMetaMask() {
-    if (window.ethereum) {
-        web3 = new Web3(window.ethereum);
-        try {
+async function connectWallet(type) {
+    const statusElement = document.getElementById('connection-status');
+    statusElement.innerText = '';
+
+    try {
+        if (type === 'metamask') {
+            if (!window.ethereum) {
+                statusElement.innerText = 'Meta Enumeration not detected. Pray, install MetaMask!';
+                return;
+            }
+            web3 = new Web3(window.ethereum);
+
+            // Request account access
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             userAccount = accounts[0];
-            document.getElementById('wallet-address').innerText = userAccount.substring(0, 6) + '...' + userAccount.substring(userAccount.length - 4);
-            document.getElementById('wallet-selection').style.display = 'none';
-            document.getElementById('wallet-status').style.display = 'block';
-            document.getElementById('connection-status').innerText = 'Connected to MetaMask!';
-        } catch (error) {
-            document.getElementById('connection-status').innerText = 'Failed to connect MetaMask: ' + error.message;
+
+            // Check for Base network (chainId 8453)
+            const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+            if (chainId !== '0x2105') {
+                try {
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: '0x2105' }], // Base Mainnet
+                    });
+                } catch (switchError) {
+                    if (switchError.code === 4902) {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: '0x2105',
+                                chainName: 'Base Mainnet',
+                                rpcUrls: ['https://mainnet.base.org'],
+                                nativeCurrency: {
+                                    name: 'Ether',
+                                    symbol: 'ETH',
+                                    decimals: 18
+                                },
+                                blockExplorerUrls: ['https://basescan.org']
+                            }],
+                        });
+                    } else {
+                        throw switchError;
+                    }
+                }
+            }
+
+            statusElement.innerText = 'Connected to MetaMask, noble knight!';
+        } else if (type === 'walletconnect') {
+            const provider = new WalletConnectWeb3Provider.Web3Provider({
+                rpc: {
+                    8453: 'https://mainnet.base.org', // Base Mainnet
+                },
+                chainId: 8453,
+            });
+            walletProvider = provider;
+
+            // Enable WalletConnect session
+            await provider.enable();
+            web3 = new Web3(provider);
+            const accounts = await web3.eth.getAccounts();
+            userAccount = accounts[0];
+
+            statusElement.innerText = 'Connected to WalletConnect, valiant knight!';
+        } else {
+            statusElement.innerText = 'Unknown wallet type, brave knight!';
+            return;
         }
-    } else {
-        document.getElementById('connection-status').innerText = 'MetaMask not detected. Please install MetaMask.';
+
+        // Update UI
+        document.getElementById('wallet-address').innerText = 
+            userAccount.substring(0, 6) + '...' + userAccount.substring(userAccount.length - 4);
+        document.getElementById('wallet-selection').style.display = 'none';
+        document.getElementById('wallet-status').style.display = 'block';
+
+    } catch (error) {
+        statusElement.innerText = `Failed to connect wallet: ${error.message}`;
+        console.error('Wallet connection error:', error);
     }
 }
 
-async function connectWalletConnect() {
-    const provider = new WalletConnectProvider({
-        infuraId: 'YOUR_INFURA_ID', // Replace with your Infura ID
-    });
-    try {
-        await provider.enable();
-        web3 = new Web3(provider);
-        const accounts = await web3.eth.getAccounts();
-        userAccount = accounts[0];
-        document.getElementById('wallet-address').innerText = userAccount.substring(0, 6) + '...' + userAccount.substring(userAccount.length - 4);
-        document.getElementById('wallet-selection').style.display = 'none';
-        document.getElementById('wallet-status').style.display = 'block';
-        document.getElementById('connection-status').innerText = 'Connected to WalletConnect!';
-    } catch (error) {
-        document.getElementById('connection-status').innerText = 'Failed to connect WalletConnect: ' + error.message;
+async function disconnectWallet() {
+    if (walletProvider && walletProvider.disconnect) {
+        await walletProvider.disconnect();
     }
+    userAccount = null;
+    walletProvider = null;
+    web3 = null;
+
+    document.getElementById('wallet-selection').style.display = 'block';
+    document.getElementById('wallet-status').style.display = 'none';
+    document.getElementById('connection-status').innerText = 'Wallet disconnected, knight. Connect again to join the crusade!';
 }
 
 function showWalletOptions() {
@@ -46,7 +104,7 @@ function showWalletOptions() {
 
 // Slideshow
 let currentSlide = 0;
-const slides = document.querySelectorAll('.slideshow-image');
+constj slides = document.querySelectorAll('.slideshow-image');
 
 function showSlide(index) {
     slides.forEach((slide, i) => {
