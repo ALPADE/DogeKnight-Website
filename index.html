@@ -49,7 +49,7 @@
             <li><a href="#mission">Mission</a></li>
             <li><a href="#gallery">Meme Gallery</a></li>
             <li><a href="#community">Community</a></li>
-            <li><a href="#" class="connect-wallet" onclick="showWalletOptions()">Connect Wallet</a></li>
+            <li><a href="#" class="connect-wallet" onclick="showWalletOptions()">Connect Thy Wallet</a></li>
         </ul>
     </nav>
 
@@ -126,13 +126,14 @@
             <p><strong>Network</strong>: Base</p>
         </div>
         <div class="launch-action">
-            <p>Ready to join the quest? Connect your wallet and prepare for glory!</p>
+            <p>Ready to join the quest? Connect thy wallet and prepare for glory!</p>
             <div id="wallet-selection">
-                <button id="connect-metamask" onclick="connectMetaMask()">Connect with MetaMask</button>
-                <button id="connect-walletconnect" onclick="connectWalletConnect()">Connect with WalletConnect</button>
+                <button id="connect-metamask" onclick="connectWallet('metamask')">Connect with MetaMask</button>
+                <button id="connect-walletconnect" onclick="connectWallet('walletconnect')">Connect with WalletConnect</button>
             </div>
             <div id="wallet-status" style="display: none;">
-                <p>Connected: <span id="wallet-address"></span></p>
+                <p>Connected Knight: <span id="wallet-address"></span></p>
+                <button id="disconnect-wallet" onclick="disconnectWallet()">Disconnect Wallet</button>
             </div>
             <p id="connection-status" style="color: #FFD700; margin-top: 10px;"></p>
         </div>
@@ -166,8 +167,8 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
-    <script src="https://unpkg.com/@walletconnect/ethereum-provider@2.15.2/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@4.5.0/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3-provider@2.17.0/dist/umd/index.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
