@@ -104,7 +104,7 @@ function showWalletOptions() {
 
 // Slideshow
 let currentSlide = 0;
-constj slides = document.querySelectorAll('.slideshow-image');
+const slides = document.querySelectorAll('.slideshow-image');
 
 function showSlide(index) {
     slides.forEach((slide, i) => {
