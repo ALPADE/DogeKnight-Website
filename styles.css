@@ -240,60 +240,39 @@ body {
     margin: 20px 0;
 }
 
-/* Presale Section */
-.presale {
-    padding: 50px 20px;
+.launch {
+    background: #1a1a1a;
+    padding: 60px 20px;
     text-align: center;
-    background-color: #2a2a2a;
+    color: #fff;
 }
-
-.presale h2 {
+.launch h2 {
     font-family: 'Cinzel', serif;
-    font-size: 36px;
+    font-size: 2.5em;
     color: #FFD700;
     margin-bottom: 20px;
 }
-
-.presale-countdown {
-    margin: 20px 0;
+.launch-details, .launch-action {
+    max-width: 800px;
+    margin: 0 auto;
 }
-
-.presale-countdown h3 {
-    font-size: 24px;
-    color: #FFD700;
+.launch-details ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
 }
-
-#countdown {
-    font-size: 20px;
-    color: #fff;
+.launch-details li {
+    font-size: 1.2em;
+    margin: 10px 0;
 }
-
-.presale-details {
-    margin: 20px 0;
-    font-size: 18px;
-}
-
-.presale-action button {
-    background-color: #FFD700;
+.launch-action button {
+    background: #FFD700;
     color: #1a1a1a;
-    border: none;
     padding: 10px 20px;
-    margin: 10px;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: 600;
-}
-
-.presale-action button:hover {
-    background-color: #e6c200;
-}
-
-#token-amount {
-    padding: 10px;
     margin: 10px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
 }
 
 /* Gallery Section */
