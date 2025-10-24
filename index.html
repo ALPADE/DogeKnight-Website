@@ -6,6 +6,8 @@
     <title>DogeKnight (DKNT) - Meme Lord of the Blockchain Realm</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Crypto Market Feed (TradingView Ticker) -->
@@ -150,42 +152,4 @@
             </div>
             <div id="wallet-status" style="display: none;">
                 <p>Connected Knight: <span id="wallet-address"></span></p>
-                <button id="disconnect-wallet" onclick="disconnectWallet()">Disconnect Wallet</button>
-            </div>
-            <p id="connection-status" style="color: #FFD700; margin-top: 10px;"></p>
-        </div>
-    </section>
-
-    <!-- Meme Gallery Section -->
-    <section id="gallery" class="gallery">
-        <h2>Meme Gallery</h2>
-        <p>Submit thy memes, Knights!</p>
-        <div class="gallery-container">
-            <img src="doge-knight.png" alt="DogeKnight Placeholder 1">
-            <img src="doge-knight2.png" alt="DogeKnight Placeholder 2">
-            <img src="doge-knight3.png" alt="DogeKnight Placeholder 3">
-        </div>
-    </section>
-
-    <!-- Community Section -->
-    <section id="community" class="community">
-        <h2>Join the Woof</h2>
-        <p>Connect with the Knights of the Woof and join the crusade!</p>
-        <ul>
-            <li><a href="https://x.com/DogeKnightsArmy" target="_blank">Follow us on X: @DogeKnightsArmy</a></li>
-            <li><a href="[Insert Discord Link]" target="_blank">Join our Discord</a></li>
-            <li><a href="[Insert Telegram Link]" target="_blank">Join our Telegram</a></li>
-        </ul>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>Contract: 0x3ebcbca3d7fa7b314f080af116b52c352036a7e3 | Woofed on Base | © 2025 Knights of the Realm</p>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@4.5.0/dist/web3.min.js"></script>
-    <script src="https://unpkg.com/@walletconnect/web3-provider@2.17.0/dist/umd/index.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+                <button id="disconnect-wallet" onclick="disconnectWallet()">Disconnect Wallet
