@@ -144,35 +144,35 @@ window.addEventListener('resize', adjustNavbarPosition);
 
 // EmailJS Contact Form Logic
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize EmailJS with your Public Key
-    emailjs.init("kkLCKkOdThngOB2ka");
+  // Initialize EmailJS with your Public Key
+  emailjs.init("kkLCKkOdThngOB2ka");
 
-    // Form submission handler
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+  // Form submission handler
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-        // Collect form data
-        const formData = {
-            user_name: document.getElementById('user_name').value || 'Anonymous Knight',
-            user_email: document.getElementById('user_email').value || 'no-reply@dogeknight.org',
-            message: document.getElementById('message').value
-        };
+    // Collect form data
+    const formData = {
+      user_name: document.getElementById('user_name').value || 'Anonymous Knight',
+      user_email: document.getElementById('user_email').value || 'no-reply@dogeknight.org',
+      message: document.getElementById('message').value
+    };
 
-        // Debug: Log data and config
-        console.log('Form Data:', formData);
-        console.log('User ID:', 'kkLCKkOdThngOB2ka');
-        console.log('Service ID:', 'YOUR_SERVICE_ID');
-        console.log('Template ID:', 'YOUR_TEMPLATE_ID');
+    // Debug: Log data and config (remove these console.logs after testing)
+    console.log('Form Data:', formData);
+    console.log('User ID:', 'kkLCKkOdThngOB2ka');
+    console.log('Service ID:', 'service_enzm04');  // From your screenshot
+    console.log('Template ID:', 'template_4n6q1ez');  // From your template screenshot
 
-        // Send via EmailJS
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData)
-            .then(function(response) {
-                console.log('Success:', response.status, response.text);
-                document.getElementById('form-status').innerHTML = "Missive dispatched! The Meme Lord hears thee! 🐕‍🦺";
-                document.getElementById('contact-form').reset();
-            }, function(error) {
-                console.error('EmailJS Error:', error);
-                document.getElementById('form-status').innerHTML = `Alas, the raven faltered: ${error.text || 'Unknown error'}. Try again or seek us on X!`;
-            });
-    });
+    // Send via EmailJS
+    emailjs.send("service_enzm04", "template_4n6q1ez", formData)
+      .then(function(response) {
+        console.log('Success:', response.status, response.text);
+        document.getElementById('form-status').innerHTML = "Missive dispatched! The Meme Lord hears thee! 🐕‍🦺";
+        document.getElementById('contact-form').reset();
+      }, function(error) {
+        console.error('EmailJS Error:', error);
+        document.getElementById('form-status').innerHTML = `Alas, the raven faltered: ${error.text || 'Unknown error'}. Try again or seek us on X!`;
+      });
+  });
 });
