@@ -161,8 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Debug: Log data and config (remove these console.logs after testing)
     console.log('Form Data:', formData);
     console.log('User ID:', 'kkLCKkOdThngOB2ka');
-    console.log('Service ID:', 'service_enzm04');  // From your screenshot
-    console.log('Template ID:', 'template_4n6q1ez');  // From your template screenshot
+    console.log('Service ID:', 'service_enzm04');
+    console.log('Template ID:', 'template_4n6q1ez');
 
     // Send via EmailJS
     emailjs.send("service_enzm04", "template_4n6q1ez", formData)
