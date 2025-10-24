@@ -294,6 +294,65 @@ body {
     max-width: 200px;
 }
 
+/* Contact Form */
+.contact-container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    text-align: center;
+    background: url('parchment-texture.jpg') center/cover;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.contact-container h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8em;
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+.contact-container p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    color: #fff;
+    margin-bottom: 20px;
+}
+#contact-form input,
+#contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    background: #fff;
+    color: #1a1a1a;
+}
+#contact-form textarea {
+    resize: vertical;
+}
+#contact-form button {
+    background: #FFD700;
+    color: #1a1a1a;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1em;
+    transition: background 0.3s;
+}
+#contact-form button:hover {
+    background: #e6c200;
+}
+#form-status {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    color: #00FF00;
+    margin-top: 10px;
+}
+
 /* Community Section */
 .community {
     padding: 60px 20px;
