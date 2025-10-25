@@ -6,8 +6,6 @@
     <title>DogeKnight (DKNT) - Meme Lord of the Blockchain Realm</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- EmailJS CDN -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Crypto Market Feed (TradingView Ticker) -->
@@ -171,10 +169,11 @@
         <div class="contact-container frame-gold">
             <h3>Send a Missive to the Meme Lord 🛡️</h3>
             <p>Share thy thoughts anonymously—no scroll address needed unless thou desirest a reply. Thy words reach the throne unseen.</p>
-            <form id="contact-form">
-                <input type="text" id="user_name" name="user_name" placeholder="Thy Name (optional, brave knight)" maxlength="50">
-                <input type="email" id="user_email" name="user_email" placeholder="Thy Scroll Address (optional, for replies)" maxlength="100">
-                <textarea id="message" name="message" placeholder="What say thee? Meme ideas? Quest feedback? Such wow..." rows="4" required maxlength="500"></textarea>
+            <form action="https://formspree.io/f/xeopjvjr" method="POST"> 
+                <input type="hidden" name="_subject" value="DogeKnight Missive">
+                <input type="text" name="user_name" placeholder="Thy Name (optional, brave knight)" maxlength="50">
+                <input type="email" name="user_email" placeholder="Thy Scroll Address (optional, for replies)" maxlength="100">
+                <textarea name="message" placeholder="What say thee? Meme ideas? Quest feedback? Such wow..." rows="4" required maxlength="500"></textarea>
                 <button type="submit">Dispatch Missive! 🚀</button>
             </form>
             <p id="form-status"></p>
@@ -194,7 +193,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>Contract: 0xa64d22aab5dac5e9d3faebef51b3f17be664a502 | Woofed on Base | © 2025 Knights of the Realm</p>
+        <p>Contract: 0x3ebcbca3d7fa7b314f080af116b52c352036a7e3 | Woofed on Base | © 2025 Knights of the Realm</p>
     </footer>
 
     <!-- Scripts -->
