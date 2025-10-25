@@ -161,11 +161,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Debug: Log data and config (remove these console.logs after testing)
     console.log('Form Data:', formData);
     console.log('User ID:', 'kkLCKkOdThngOB2ka');
-    console.log('Service ID:', 'service_enzm04');
-    console.log('Template ID:', 'template_4n6q1ez');
+    console.log('Service ID:', 'service_va73vfm'); // Updated with your new Service ID
+    console.log('Template ID:', 'template_mrn9qgu'); // Updated with your new Template ID
 
     // Send via EmailJS
-    emailjs.send("service_enzm04", "template_4n6q1ez", formData)
+    emailjs.send("service_va73vfm", "template_mrn9qgu", formData)
       .then(function(response) {
         console.log('Success:', response.status, response.text);
         document.getElementById('form-status').innerHTML = "Missive dispatched! The Meme Lord hears thee! 🐕‍🦺";
