@@ -16,12 +16,12 @@ async function connectWallet(type) {
             web3 = new Web3(window.ethereum);
 
             // Request account access
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const accounts = await web3.eth.getAccounts(); // Adjusted for v1.10.0
             userAccount = accounts[0];
 
             // Check for Base network (chainId 8453)
-            const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-            if (chainId !== '0x2105') {
+            const chainId = await web3.eth.getChainId(); // Adjusted for v1.10.0
+            if (chainId !== 8453) { // Using decimal for simplicity
                 try {
                     await window.ethereum.request({
                         method: 'wallet_switchEthereumChain',
@@ -51,21 +51,9 @@ async function connectWallet(type) {
 
             statusElement.innerText = 'Connected to MetaMask, noble knight!';
         } else if (type === 'walletconnect') {
-            const provider = new WalletConnectWeb3Provider.Web3Provider({
-                rpc: {
-                    8453: 'https://mainnet.base.org', // Base Mainnet
-                },
-                chainId: 8453,
-            });
-            walletProvider = provider;
-
-            // Enable WalletConnect session
-            await provider.enable();
-            web3 = new Web3(provider);
-            const accounts = await web3.eth.getAccounts();
-            userAccount = accounts[0];
-
-            statusElement.innerText = 'Connected to WalletConnect, valiant knight!';
+            // Temporarily disabled for testing
+            statusElement.innerText = 'WalletConnect disabled for now, use MetaMask, brave knight!';
+            return;
         } else {
             statusElement.innerText = 'Unknown wallet type, brave knight!';
             return;
@@ -142,37 +130,15 @@ function adjustNavbarPosition() {
 window.addEventListener('load', adjustNavbarPosition);
 window.addEventListener('resize', adjustNavbarPosition);
 
-// EmailJS Contact Form Logic
+// Formspree Form Submission Handler (Optional: For Success Message)
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize EmailJS with your Public Key
-  emailjs.init("kkLCKkOdThngOB2ka");
-
-  // Form submission handler
-  document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    // Collect form data
-    const formData = {
-      user_name: document.getElementById('user_name').value || 'Anonymous Knight',
-      user_email: document.getElementById('user_email').value || 'no-reply@dogeknight.org',
-      message: document.getElementById('message').value
-    };
-
-    // Debug: Log data and config (remove these console.logs after testing)
-    console.log('Form Data:', formData);
-    console.log('User ID:', 'kkLCKkOdThngOB2ka');
-    console.log('Service ID:', 'service_va73vfm'); // Updated with your new Service ID
-    console.log('Template ID:', 'template_mrn9qgu'); // Updated with your new Template ID
-
-    // Send via EmailJS
-    emailjs.send("service_va73vfm", "template_mrn9qgu", formData)
-      .then(function(response) {
-        console.log('Success:', response.status, response.text);
+  const form = document.querySelector('form[action*="formspree.io"]');
+  if (form) {
+    form.addEventListener('submit', function(event) {
+      // Optional: Add a simple success message (Formspree redirects on success)
+      setTimeout(function() {
         document.getElementById('form-status').innerHTML = "Missive dispatched! The Meme Lord hears thee! 🐕‍🦺";
-        document.getElementById('contact-form').reset();
-      }, function(error) {
-        console.error('EmailJS Error:', error);
-        document.getElementById('form-status').innerHTML = `Alas, the raven faltered: ${error.text || 'Unknown error'}. Try again or seek us on X!`;
-      });
-  });
+      }, 2000); // Delay to simulate processing
+    });
+  }
 });
